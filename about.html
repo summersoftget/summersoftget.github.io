@@ -18,23 +18,128 @@
             min-height: 100vh;
         }
 
-        .nav-container { 
+        /* ----- ESTILOS DO HEADER ADAPTADO ----- */
+        .header.adr {
             width: 100%;
-            text-align: center; 
-            padding: 20px 0; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Mantém botão na esquerda e logo centralizado/direita */
+            padding: 15px 20px;
             border-bottom: 1px solid #ddd;
             box-sizing: border-box;
+            position: relative;
         }
-        .nav-container a { color: #000; text-decoration: none; margin: 0 10px; font-size: 16px; display: inline-block; }
-        .nav-container a:hover { text-decoration: underline; }
-        .nav-container strong { margin: 0 10px; border-bottom: 2px solid #000; padding-bottom: 2px; display: inline-block; }
 
+        .nav-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .btn .txt {
+            font-size: 14px;
+            font-family: "Times New Roman", serif;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+
+        .btn .ico svg {
+            display: block;
+            font-size: 20px;
+        }
+
+        .logo-area {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Centraliza o logo perfeitamente no meio do header */
+        }
+
+        /* ----- ESTILOS DO MENU LATERAL (SLIDE MENU) ----- */
+        .slide-menu-wrap {
+            position: fixed;
+            top: 0;
+            left: -100%; /* Esconde o menu para fora da tela (lado esquerdo) */
+            width: 300px;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 9999;
+            transition: left 0.3s ease; /* Animação suave ao abrir/fechar */
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Classe que o JavaScript vai ativar para abrir o menu */
+        .slide-menu-wrap.active {
+            left: 0;
+        }
+
+        .btn-slide-close {
+            margin-bottom: 40px;
+        }
+
+        .slide-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .slide-body ul li {
+            margin-bottom: 20px;
+        }
+
+        .slide-body ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 22px;
+            text-transform: lowercase;
+        }
+
+        .slide-body ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .slide-body ul li strong {
+            font-size: 22px;
+            text-transform: lowercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 2px;
+        }
+
+        .slide-body ul li span {
+            color: #000;
+            margin-left: 2px;
+        }
+
+        /* Redes Sociais no Menu */
+        .sns-wrap {
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .sns-wrap img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* ----- CONTAINER DE CONTEÚDO ----- */
         .content-container {
             max-width: 650px;
             text-align: center;
             padding: 20px;
-            
-           
             margin-top: 5vh; 
         }
 
@@ -54,14 +159,68 @@
     </style>   
 </head>
 <body>
-    <div class="nav-container">
-        <a href="index.html">home</a> //
-        <strong>about</strong> //
-        <a href="blog.html">about</a> //
-        <a href="https://www.youtube.com/@getuliotecchio">youtube</a> //
-        <a href="https://github.com/summersoftget">github</a>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="header adr">
+        <!-- Botão do Menu Hamburguer -->
+        <div class="nav-area">
+            <button class="btn btn-nav ico-only" id="open-menu-btn">
+                <span class="txt">Menu</span>
+                <span class="ico">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6l16 0"></path>
+                        <path d="M4 12l16 0"></path>
+                        <path d="M4 18l16 0"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+        <!-- Área do Logo Centralizado -->
+        <div class="logo-area">
+            <a class="logo adr" href="index.html">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <picture>
+                        <img src="logo.png" style="height: 60px; width: auto; object-fit: contain;" alt="Logo Principal">
+                    </picture>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL (SLIDE MENU) -->
+    <div class="slide-menu-wrap" id="slide-menu">
+        <div class="slide-body">
+            <!-- Botão de Fechar -->
+            <button class="btn ico-only btn-slide-close" id="close-menu-btn">
+                <span class="txt">Fechar</span>
+                <span class="ico">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6l-12 12"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </span>
+            </button>
+            
+            <!-- Links do Menu -->
+            <ul>
+                <li><a href="index.html">home<span>.</span></a></li>
+                <li><a href="blog.html">blog<span>.</span></a></li>
+                <li><strong>about</strong></li>
+                <li><a href="https://www.youtube.com/@getuliotecchio" target="_blank">youtube<span>.</span></a></li>
+                <li><a href="https://github.com/summersoftget" target="_blank">github<span>.</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Redes Sociais do Menu Lateral -->
+        <div class="sns-wrap">
+            <span><a href="http://tiktok.com/@seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a></span>
+            <span><a href="http://instagram.com/seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a></span>
+            <span><a href="http://x.com/seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a></span>
+        </div>
     </div>
 
+    <!-- CONTEÚDO DA PÁGINA -->
     <div class="content-container">
 
         <img src="art2.png" class="responsive-art" alt="u2">
@@ -83,6 +242,23 @@
         </p>
 
     </div>
+
+    <!-- JAVASCRIPT PARA ABRIR E FECHAR O MENU -->
+    <script>
+        const openMenuBtn = document.getElementById('open-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const slideMenu = document.getElementById('slide-menu');
+
+        // Abre o menu ao clicar no botão "Menu"
+        openMenuBtn.addEventListener('click', () => {
+            slideMenu.classList.add('active');
+        });
+
+        // Fecha o menu ao clicar no botão "Fechar"
+        closeMenuBtn.addEventListener('click', () => {
+            slideMenu.classList.remove('active');
+        });
+    </script>
 
 </body>
 </html>
