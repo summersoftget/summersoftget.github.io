@@ -70,7 +70,8 @@
             top: 0;
             left: -100%; 
             width: 100%;
-            max-width: 575px; /* Largura máxima definida por você */
+            max-width: 575px;
+            font-family: "Times New Roman", serif; /* Ajustado para manter a consistência ou use "BigHitB" se preferir */
             height: 100vh;
             background-color: #ffffff;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
@@ -79,7 +80,7 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* Permite scroll se as imagens passarem da tela do celular */
+            justify-content: space-between;
         }
 
         .slide-menu-wrap.active {
@@ -87,7 +88,7 @@
         }
 
         .slide-body {
-            padding: 80px 20px 20px 20px; /* Espaço no topo para o botão de fechar não cobrir a primeira imagem */
+            padding: 80px 40px 20px 40px; /* Ajustado para dar mais elegância ao menu de texto */
             position: relative;
         }
 
@@ -105,29 +106,42 @@
         }
 
         .slide-body ul li {
-            margin-bottom: 15px;
+            margin-bottom: 24px; /* Espaçamento confortável entre os links */
             width: 100%;
         }
 
-        /* Imagens de Navegação dentro do Menu */
-        .menu-img-btn {
-            display: block;
-            width: 100%;
-            height: 80px; /* Altura fixa exigida */
-            object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer as proporções */
-            border-radius: 4px; /* Opcional: deixa as pontas levemente arredondadas */
+        /* Formatação dos links de texto do Menu */
+        .slide-body ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 24px;
+            text-transform: lowercase;
+            display: inline-block;
             transition: opacity 0.2s ease;
         }
 
-        .menu-img-btn:hover {
-            opacity: 0.85; /* Efeito visual ao passar o mouse */
+        .slide-body ul li a:hover {
+            opacity: 0.6;
+        }
+
+        /* Indicador da página atual (.about) */
+        .slide-body ul li strong {
+            font-size: 24px;
+            text-transform: lowercase;
+            font-weight: bold;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 2px;
+        }
+
+        .slide-body ul li span {
+            margin-left: 2px;
         }
 
         /* Redes Sociais no Fundo do Menu */
         .sns-wrap {
             display: flex;
             gap: 15px;
-            padding: 20px;
+            padding: 40px; /* Alinhado com o padding do slide-body */
             margin-top: auto;
         }
 
@@ -201,40 +215,21 @@
                 </span>
             </button>
             
-            <!-- Abas com Imagens no lugar de Texto -->
+            <!-- Links de Navegação em Texto -->
             <ul>
-                <li>
-                    <a href="index.html">
-                        <img src="caminho_da_imagem_home.png" class="menu-img-btn" alt="Home">
-                    </a>
-                </li>
-                <li>
-                    <a href="blog.html">
-                        <img src="caminho_da_imagem_blog.png" class="menu-img-btn" alt="Blog">
-                    </a>
-                </li>
-                <li>
-                    <!-- Aba Atual (About) sem link, apenas a imagem ativa -->
-                    <img src="caminho_da_imagem_about.png" class="menu-img-btn" alt="About" style="border: 2px solid #000;">
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/@getuliotecchio" target="_blank">
-                        <img src="caminho_da_imagem_youtube.png" class="menu-img-btn" alt="YouTube">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/summersoftget" target="_blank">
-                        <img src="caminho_da_imagem_github.png" class="menu-img-btn" alt="GitHub">
-                    </a>
-                </li>
+                <li><a href="index.html">home<span>.</span></a></li>
+                <li><a href="blog.html">blog<span>.</span></a></li>
+                <li><strong>about</strong></li>
+                <li><a href="https://www.youtube.com/@getuliotecchio" target="_blank">youtube<span>.</span></a></li>
+                <li><a href="https://github.com/summersoftget" target="_blank">github<span>.</span></a></li>
             </ul>
         </div>
 
         <!-- Redes Sociais do Menu Lateral -->
         <div class="sns-wrap">
-            <span><a href="http://tiktok.com/@seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a></span>
-            <span><a href="http://instagram.com/seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a></span>
-            <span><a href="http://x.com/seu_usuario" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a></span>
+            <span><a href="http://tiktok.com/@getuliao" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a></span>
+            <span><a href="http://instagram.com/getuliotecchio" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a></span>
+            <span><a href="http://x.com/getuliao3" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a></span>
         </div>
     </div>
 
