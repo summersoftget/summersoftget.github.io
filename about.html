@@ -1,33 +1,61 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <style>
-        body{
-            top: 0;
-            left: 0;
-            width: 97%;
-            position: absolute;
-            display: table;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: "Times New Roman", serif;
+            
+            /* Ativa o Flexbox para alinhar tudo ao centro horizontalmente */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alinha o conteúdo ao topo por padrão */
+            min-height: 100vh;
         }
-        p{
-            display: table-cell; vertical-align: middle; text-align: center; line-height: 1.5;
+
+        .content-container {
+            max-width: 650px; /* Limita a largura para o texto não ficar gigante e esticado na tela */
+            text-align: center; /* Centraliza o texto */
+            padding: 20px;
+            
+            /* CONTROLADOR DE ALTURA: Aumente ou diminua esse valor para mover o bloco mais para baixo */
+            margin-top: 15vh; /* 15vh significa 15% da altura da tela de distância do topo */
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 16px;
+            color: #000000;
+            margin-bottom: 24px; /* Isso cria o espaço perfeito entre um parágrafo e outro */
         }
     </style>   
 </head>
 <body>
-    <p>
-        Getulio Tecchio is an undergraduate Computer Science student at the Federal University of ABC (UFABC). His interests span programming, mathematics, music, philosophy, literature, art, and physiology. Rather than seeing these as separate disciplines, he enjoys exploring the connections between them and understanding the principles that tie them together.
 
-As a musician, he draws inspiration from artists such as John Mayer, Stevie Wonder, Prince, Chet Baker, Dijon, Paul Simon, Phil Collins, and Sting. At first glance, this may seem like an eclectic mix of genres and styles, but what unites these artists is their devotion to music as a craft. They create with sincerity, curiosity, and an unwavering commitment to becoming better musicians.
+    <div class="content-container">
+        
+        <p>
+            Getulio Tecchio is an undergraduate Computer Science student at the Federal University of ABC (UFABC). His interests span programming, mathematics, music, philosophy, literature, art, and physiology. Rather than seeing these as separate disciplines, he enjoys exploring the connections between them and understanding the principles that tie them together.
+        </p>
 
-More than anything, Getulio is drawn to things that make him feel alive. Whether it's a piece of music, a book, a mathematical proof, or a work of art, he admires creations that carry the unmistakable feeling that someone gave their whole self to them—the kind of work that quietly reminds you, <b><i>this is what being human feels like.</i></b>
+        <p>
+            As a musician, he draws inspiration from artists such as John Mayer, Stevie Wonder, Prince, Chet Baker, Dijon, Paul Simon, Phil Collins, and Sting. At first glance, this may seem like an eclectic mix of genres and styles, but what unites these artists is their devotion to music as a craft. They create with sincerity, curiosity, and an unwavering commitment to becoming better musicians.
+        </p>
 
-He hopes to live a life filled with curiosity, meaningful work, and people he loves, while creating things that leave others with that same feeling.
-        <br>
-        <br>
-        <br>
-     </p>
+        <p>
+            More than anything, Getulio is drawn to things that make him feel alive. Whether it's a piece of music, a book, a mathematical proof, or a work of art, he admires creations that carry the unmistakable feeling that someone gave their whole self to them—the kind of work that quietly reminds you, <b><i>this is what being human feels like.</i></b>
+        </p>
+
+        <p>
+            He hopes to live a life filled with curiosity, meaningful work, and people he loves, while creating things that leave others with that same feeling.
+        </p>
+
+    </div>
+
 </body>
 </html>
