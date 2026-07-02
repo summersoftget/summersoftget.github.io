@@ -7,71 +7,102 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    }
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            font-family: "Times New Roman", serif;
+            background-color: #ffffff;
+        }
 
-    body {
-        min-height: 100vh;
-        font-family: "Times New Roman", serif;
-    }
+        #main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-    #main {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+        .main-title {
+            font-size: clamp(24px, 5vw, 42px);
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-    #contact {
-        position: fixed;
-        right: 16px;
-        bottom: 12px;
-        font-size: 14px;
-        color: #666;
-        text-align: right;
-        line-height: 1.35;
-    }
+        .responsive-logo {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            margin-bottom: 25px;
+        }
 
-    #contact .address {
-        margin-top: 8px;
-    }
+        .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            margin: 5px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
 
+        #contact {
+            position: fixed;
+            right: 16px;
+            bottom: 12px;
+            font-size: 14px;
+            color: #666;
+            text-align: right;
+            line-height: 1.35;
+        }
+
+        #contact .address {
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            #main {
+                padding-bottom: 100px;
+            }
+            #contact {
+                position: relative;
+                text-align: center;
+                right: auto;
+                bottom: auto;
+                margin-top: -60px;
+                padding-bottom: 30px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div id="main">
     <div>
+        <div class="main-title">「THE MOST AWESOME WEBSITE EVER」</div>
 
-        <font size="12"><i><b>「THE MOST AWESOME WEBSITE EVER」</b></i></font>
+        <img src="logo.png" class="responsive-logo" alt="u.u">
 
-        <br><br>
-
-        <img src="logo.png" style="width:560px;" alt="u.u">
-
-        <br><br>
-
-        <a href="https://summersoftget.github.io/about.html">about</a> //
-        <a href="https://summersoftget.github.io/blog.html">blog</a> //
-        <a href="https://www.youtube.com/@getuliotecchio">youtube</a> //
-        <a href="https://github.com/summersoftget">github</a> //
-
+        <div class="nav-links">
+            <a href="https://summersoftget.github.io/about.html">about</a> //
+            <a href="https://summersoftget.github.io/blog.html">blog</a> //
+            <a href="https://www.youtube.com/@getuliotecchio">youtube</a> //
+            <a href="https://github.com/summersoftget">github</a>
+        </div>
     </div>
 </div>
 
 <div id="contact">
     <div>getuliotecchio1[at]gmail.com</div>
-
     <div class="address">
         São Paulo<br>
         Brazil
     </div>
 </div>
-
-
 
 </body>
 </html>
