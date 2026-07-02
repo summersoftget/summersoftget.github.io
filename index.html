@@ -5,24 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getulio</title>
     <style>
-        body { font-family: sans-serif; background-color: #ffffff; color: #000000; margin: 0; padding: 0; }
-        .container { display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .centered-element { font-size: 2.5rem; font-weight: bold; margin-bottom: 20px; }
-        .profile-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; }
-        a { color: #0366d6; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: "Times New Roman", serif;
+    }
+
+    #main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #contact {
+        position: fixed;
+        right: 16px;
+        bottom: 12px;
+        font-size: 14px;
+        color: #666;
+        text-align: right;
+        line-height: 1.35;
+    }
+
+    #contact .address {
+        margin-top: 8px;
+    }
+
     </style>
 </head>
 <body>
 
+<div id="main">
+    <div>
 
-    <div class="container">
-        <div class="centered-element">
-            「GETULIO TECCHIO」 
-        </div>
+        <font size="12"><i><b>「JAMES SCHOLZ」</b></i></font>
 
-        <img class="profile-img" src="logo.png" alt="logo">
+        <br><br>
+
+        <img src="logo.png" style="width:560px;" alt="u.u">
+
+        <br><br>
+
+        <a href="http://jvscholz.com/about.html">about</a> //
+        <a href="https://bloggyddoggy.com">blog</a> //
+        <a href="https://www.youtube.com/@jamesscholz">youtube</a> //
+        <a href="https://github.com/summersoftget">github</a> //
+
     </div>
+</div>
+
+<div id="contact">
+    <div>getuliotecchio1[at]gmail.com</div>
+
+    <div class="address">
+        São Paulo<br>
+        Brazil
+    </div>
+</div>
+
+
 
 </body>
 </html>
