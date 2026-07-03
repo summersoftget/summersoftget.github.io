@@ -6,40 +6,305 @@
     <title>Getulio Tecchio - The Blog</title>
     <link rel="icon" href="images/u_favicon.png" type="image/png">
     <style>
-        body { font-family: 'Times New Roman', serif; margin: 0; padding: 0; background-color: #fff; color: #000; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: "Times New Roman", serif;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ----- HEADER ADAPTADO (80PX DE ALTURA) ----- */
+        .header.adr {
+            width: 100%;
+            height: 80px; /* Força o header a ter exatamente 80px */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px; /* 10px em cima e embaixo */
+            border-bottom: 1px solid #ddd;
+            box-sizing: border-box;
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        .nav-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .btn .txt {
+            font-size: 14px;
+            font-family: "Times New Roman", serif;
+            margin-right: 5px;
+            text-transform: uppercase;
+            color: #000000;
+        }
+
+        .btn .ico svg {
+            display: block;
+            font-size: 20px;
+        }
+
+        .logo-area {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ----- MENU LATERAL (HAMBURGER) ----- */
+        .slide-menu-wrap {
+            position: fixed;
+            top: 0;
+            left: -100%; 
+            width: 100%;
+            max-width: 575px;
+            font-family: "Times New Roman", serif;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 9999;
+            transition: left 0.3s ease;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide-menu-wrap.active {
+            left: 0;
+        }
+
+        .slide-body {
+            padding: 80px 40px 20px 40px;
+            position: relative;
+            text-align: left; /* Garante que os links do menu alinhem à esquerda */
+        }
+
+        /* Botão Fechar: Apenas o X no canto superior direito */
+        .btn-slide-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+
+        .slide-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .slide-body ul li {
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        /* Formatação dos links de texto do Menu */
+        .slide-body ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 24px;
+            text-transform: lowercase;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .slide-body ul li a:hover {
+            opacity: 0.6;
+        }
+
+        /* Indicador da página atual (.blog) */
+        .slide-body ul li strong {
+            font-size: 24px;
+            text-transform: lowercase;
+            font-weight: bold;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 2px;
+        }
+
+        .slide-body ul li span {
+            margin-left: 2px;
+        }
+
+        /* Redes Sociais no Fundo do Menu */
+        .sns-wrap {
+            display: flex;
+            gap: 15px;
+            padding: 40px;
+            margin-top: auto;
+        }
+
+        .sns-wrap img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* ----- CONTEÚDO DO BLOG ----- */
+        .blog-header {
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
         
-        .nav-container { text-align: center; padding: 20px 0; border-bottom: 1px solid #ddd; }
-        .nav-container a { color: #000; text-decoration: none; margin: 0 10px; font-size: 16px; }
-        .nav-container a:hover { text-decoration: underline; }
-        .nav-container strong { margin: 0 10px; border-bottom: 2px solid #000; padding-bottom: 2px; }
+        .blog-title {
+            font-size: 40px;
+            font-weight: bold;
+        }
+        
+        .blog-subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
 
-        .blog-header { text-align: center; margin-top: 60px; margin-bottom: 40px; }
-        .blog-title { font-size: 40px; font-weight: bold; }
-        .blog-subtitle { font-size: 18px; color: #555; }
+        .post-container {
+            max-width: 650px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .post-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .post-item {
+            margin-bottom: 50px;
+            border-left: 2px solid #ddd;
+            padding-left: 20px;
+            text-align: left; /* Mantém a estrutura de leitura do post limpa */
+        }
 
-        .post-container { max-width: 650px; margin: 0 auto; padding: 20px; text-align: center; }
-        .post-list { list-style: none; padding: 0; }
-        .post-item { margin-bottom: 50px; border-left: 2px solid #ddd; padding-left: 20px; }
+        .post-date {
+            color: grey;
+            font-style: italic;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .post-title-link {
+            color: #000;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .post-title-link:hover {
+            text-decoration: underline;
+        }
+        
+        .post-summary {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        
+        .read-more {
+            color: grey;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
 
-        .post-date { color: grey; font-style: italic; font-size: 14px; display: block; margin-bottom: 8px; }
-        .post-title-link { color: #000; text-decoration: none; font-size: 24px; font-weight: bold; display: block; margin-bottom: 12px; }
-        .post-title-link:hover { text-decoration: underline; }
-        .post-summary { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 12px; }
-        .read-more { color: grey; text-decoration: none; font-size: 14px; }
-        .read-more:hover { text-decoration: underline; }
-
-        .footer { position: fixed; bottom: 12px; right: 16px; font-size: 12px; color: grey; text-align: right; line-height: 1.4; }
+        /* ----- FOOTER ----- */
+        .footer {
+            margin-top: auto; /* Empurra o footer para baixo caso haja poucos posts */
+            padding: 20px 16px;
+            font-size: 12px;
+            color: grey;
+            text-align: right;
+            line-height: 1.4;
+            align-self: flex-end; /* Alinha o footer à direita na página */
+        }
     </style>
 </head>
 <body>
-    <div class="nav-container">
-        <a href="index.html">home</a> //
-        <a href="about.html">about</a> //
-        <strong>blog</strong> //
-        <a href="https://www.youtube.com/@getuliotecchio">youtube</a> //
-        <a href="https://github.com/summersoftget">github</a>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="header adr">
+        <div class="nav-area">
+            <button class="btn btn-nav ico-only" id="open-menu-btn">
+                <span class="txt">Menu</span>
+                <span class="ico">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6l16 0"></path>
+                        <path d="M4 12l16 0"></path>
+                        <path d="M4 18l16 0"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+        <div class="logo-area">
+            <a class="logo adr" href="index.html">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <picture>
+                        <img src="logo.png" style="height: 60px; width: auto; object-fit: contain;" alt="Logo Principal">
+                    </picture>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL (SLIDE MENU) -->
+    <div class="slide-menu-wrap" id="slide-menu">
+        <div class="slide-body">
+            <!-- Botão de Fechar (Apenas o X) -->
+            <button class="btn ico-only btn-slide-close" id="close-menu-btn">
+                <span class="ico">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6l-12 12"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+                </span>
+            </button>
+            
+            <!-- Links de Navegação em Texto -->
+            <ul>
+                <li><a href="index.html">home<span>.</span></a></li>
+                <li><strong>blog</strong></li>
+                <li><a href="about.html">about<span>.</span></a></li>
+                <li><a href="https://www.youtube.com/@getuliotecchio" target="_blank">youtube<span>.</span></a></li>
+                <li><a href="https://github.com/summersoftget" target="_blank">github<span>.</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Redes Sociais do Menu Lateral -->
+        <div class="sns-wrap">
+            <span><a href="http://tiktok.com/@getuliao" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a></span>
+            <span><a href="http://instagram.com/getuliotecchio" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a></span>
+            <span><a href="http://x.com/getuliao3" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a></span>
+        </div>
     </div>
 
+    <!-- CONTEÚDO DA PÁGINA DO BLOG -->
     <div class="blog-header">
         <div class="blog-title">「THE BLOG」</div>
         <p class="blog-subtitle">Musings on Computer Science, Music, Philosophy, and Art.</p>
@@ -68,10 +333,27 @@
         </ul>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
         getuliotecchio1[at]gmail.com<br>
         São Paulo<br>
         Brazil
     </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const openMenuBtn = document.getElementById('open-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const slideMenu = document.getElementById('slide-menu');
+
+        openMenuBtn.addEventListener('click', () => {
+            slideMenu.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            slideMenu.classList.remove('active');
+        });
+    </script>
+
 </body>
 </html>
