@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getulio</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Force body to be exactly the viewport height and stack items vertically */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: "Times New Roman", serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+        }
+
+        /* Main area takes up all available space */
+        #main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-title {
+            font-size: clamp(22px, 5vw, 42px);
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .responsive-logo {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            margin-bottom: 25px;
+            max-height: 25vh; 
+            object-fit: contain;
+        }
+
+        .nav-links a, .nav-links span.trigger {
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .nav-links a:hover, .nav-links span.trigger:hover {
+            text-decoration: underline;
+        }
+
+        .sns-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .sns-wrap img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .sns-wrap img:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- POEMS OVERLAY CONTAINER --- */
+        #poems-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            overflow-y: auto; /* Allows scrolling through poems if they are long */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Triggered by JavaScript */
+        #poems-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .poems-content {
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 24px;
+            box-sizing: border-box;
+            text-align: left; /* Editorial poem alignment */
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 24px;
+            font-size: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+        }
+        .close-btn:hover {
+            text-decoration: underline;
+        }
+
+        .poem-block {
+            margin-bottom: 50px;
+        }
+
+        .poem-title {
+            font-size: 22px;
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .poem-lines {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #222;
+        }
+
+        /* --- CONTACT FOOTER --- */
+        #contact {
+            position: fixed;
+            right: 16px;
+            bottom: 12px;
+            font-size: 14px;
+            color: #666;
+            text-align: right;
+            line-height: 1.35;
+            z-index: 10;
+        }
+
+        #contact .address {
+            margin-top: 4px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            #contact {
+                position: static; 
+                text-align: center;
+                padding-bottom: 20px; 
+                font-size: 13px;
+            }
+            .poems-content {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <div>
+        <div class="main-title">「THE MOST AWESOME WEBSITE EVER」</div>
+
+        <img src="logo.png" class="responsive-logo" alt="u.u">
+
+        <div class="nav-links">
+            <a href="https://summersoftget.github.io/about.html">about</a> //
+            <a href="https://summersoftget.github.io/blog.html">blog</a> //
+            <!-- Added Poems link here -->
+            <span class="trigger" onclick="togglePoems(true)">poems</span> //
+            <a href="https://www.youtube.com/@getuliotecchio">youtube</a> //
+            <a href="https://github.com/summersoftget">github</a>
+        </div>
+
+        <div class="sns-wrap">
+            <a href="http://tiktok.com/@getuliao" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a>
+            <a href="http://instagram.com/getuliotecchio" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a>
+            <a href="http://x.com/getuliao3" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a>
+        </div>
+    </div>
+</div>
+
+<!-- POEMS OVERLAY SCREEN -->
+<div id="poems-overlay">
+    <div class="poems-content">
+        <button class="close-btn" onclick="togglePoems(false)">[ close ]</button>
+        
+        <!-- Poem 1 -->
+        <div class="poem-block">
+            <div class="poem-title">O Mar Singular</div>
+            <div class="poem-lines">
+                As ondas que quebram na areia,<br>
+                Não pedem licença ao olhar.<br>
+                A lua que a noite clareia,<br>
+                Apenas ensina a flutuar.
+            </div>
+        </div>
+
+        <!-- Poem 2 -->
+        <div class="poem-block">
+            <div class="poem-title">Linhas de Silêncio</div>
+            <div class="poem-lines">
+                O código roda no escuro,<br>
+                A mente procura um sinal.<br>
+                Construo meu próprio futuro,<br>
+                Entre o pixel e o papel jornal.
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="contact">
+    <div>getuliotecchio1[at]gmail.com</div>
+    <div class="address">
+        São Paulo<br>
+        Brazil
+    </div>
+</div>
+
+<!-- Tiny JavaScript function to toggle the view -->
+<script>
+    function togglePoems(show) {
+        const overlay = document.getElementById('poems-overlay');
+        if (show) {
+            overlay.classList.add('active');
+        } else {
+            overlay.classList.remove('active');
+        }
+    }
+</script>
+
+</body>
+</html>
