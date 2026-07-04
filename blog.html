@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getulio The Blog</title>
+    <title>Getulio - Poems</title>
     <link rel="icon" href="images/u_favicon.png" type="image/png">
     <style>
         body {
@@ -126,7 +126,7 @@
             opacity: 0.6;
         }
 
-        /* Indicador da página atual (.blog) */
+        /* Indicador da página atual (.poems) */
         .slide-body ul li strong {
             font-size: 24px;
             text-transform: lowercase;
@@ -153,95 +153,82 @@
             object-fit: contain;
         }
 
-        /* ----- CONTEÚDO DO BLOG ----- */
-        .blog-header {
+        /* ----- CONTEÚDO DA PÁGINA DE POEMAS ----- */
+        .poems-header {
             text-align: center;
             margin-top: 60px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             padding: 0 20px;
         }
         
-        .blog-title {
+        .poems-title {
             font-size: 40px;
             font-weight: bold;
+            letter-spacing: 2px;
         }
         
-        .blog-subtitle {
+        .poems-subtitle {
             font-size: 18px;
+            font-style: italic;
             color: #555;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        .post-container {
-            max-width: 650px;
+        .poems-container {
+            max-width: 600px;
             width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
             box-sizing: border-box;
-            text-align: center;
         }
         
-        .post-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .post-item {
-            margin-bottom: 50px;
-            border-left: 2px solid #ddd;
-            padding-left: 20px;
-            text-align: left; /* Mantém a estrutura de leitura do post limpa */
+        .poem-item {
+            margin-bottom: 80px;
+            text-align: left;
         }
 
-        .post-date {
+        .poem-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .poem-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .poem-date {
             color: grey;
             font-style: italic;
             font-size: 14px;
-            display: block;
-            margin-bottom: 8px;
         }
         
-        .post-title-link {
-            color: #000;
-            text-decoration: none;
-            font-size: 24px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 12px;
-        }
-        
-        .post-title-link:hover {
-            text-decoration: underline;
-        }
-        
-        .post-summary {
-            color: #555;
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            margin-top: 0;
-        }
-        
-        .read-more {
-            color: grey;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        
-        .read-more:hover {
-            text-decoration: underline;
+        /* A tag pre mantém a formatação exata de espaços e quebras de linha que você digitar */
+        .poem-content {
+            font-family: "Times New Roman", serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #111;
+            margin: 0;
+            white-space: pre-wrap; /* Permite quebra automática se a tela for muito pequena */
         }
 
         /* ----- FOOTER ----- */
         .footer {
-            margin-top: auto; /* Empurra o footer para baixo caso haja poucos posts */
-            padding: 20px 16px;
+            margin-top: auto; /* Empurra o footer para baixo caso haja poucos poemas */
+            padding: 40px 16px 20px 16px;
             font-size: 12px;
             color: grey;
             text-align: right;
             line-height: 1.4;
             align-self: flex-end; /* Alinha o footer à direita na página */
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -289,9 +276,9 @@
             <!-- Links de Navegação em Texto -->
             <ul>
                 <li><a href="index.html">home<span>.</span></a></li>
-                <li><strong>blog</strong></li>
+                <li><a href="blog.html">blog<span>.</span></a></li>
                 <li><a href="about.html">about<span>.</span></a></li>
-                <li><a href="https://summersoftget.github.io/poems.html">poems<span>.</span></a></li>
+                <li><strong>poems</strong></li>
                 <li><a href="https://www.youtube.com/@getuliotecchio" target="_blank">youtube<span>.</span></a></li>
                 <li><a href="https://github.com/summersoftget" target="_blank">github<span>.</span></a></li>
             </ul>
@@ -305,33 +292,44 @@
         </div>
     </div>
 
-    <!-- CONTEÚDO DA PÁGINA DO BLOG -->
-    <div class="blog-header">
-        <div class="blog-title">「THE BLOG」</div>
-        <p class="blog-subtitle">Musings on Computer Science, Music, Philosophy, and Art.</p>
+    <!-- CONTEÚDO DA PÁGINA DE POEMAS -->
+    <div class="poems-header">
+        <div class="poems-title">「POEMS」</div>
+        <p class="poems-subtitle">Versos, fragmentos e antologias de gaveta.</p>
     </div>
 
-    <div class="post-container">
-        <ul class="post-list">
-            <li class="post-item">
-                <span class="post-date">October 26, 2023</span>
-                <a href="#" class="post-title-link">Teste 3</a>
-                <p class="post-summary">legenda 3</p>
-                <a href="#" class="read-more">read more //</a>
-            </li>
-            <li class="post-item">
-                <span class="post-date">October 18, 2023</span>
-                <a href="#" class="post-title-link">Teste 2</a>
-                <p class="post-summary">legenda 2</p>
-                <a href="#" class="read-more">read more //</a>
-            </li>
-            <li class="post-item">
-                <span class="post-date">October 17, 2023</span>
-                <a href="#" class="post-title-link">Teste 1</a>
-                <p class="post-summary">legenda 1</p>
-                <a href="#" class="read-more">read more //</a>
-            </li>
-        </ul>
+    <div class="poems-container">
+        
+        <!-- POEMA 2 -->
+        <div class="poem-item">
+            <div class="poem-meta">
+                <h2 class="poem-name">Título do Poema Segundo</h2>
+                <span class="poem-date">March 14, 2026</span>
+            </div>
+            <!-- O espaço antes das linhas no <pre> define o recuo. Digite o poema exatamente como quer exibi-lo -->
+<pre class="poem-content">Esta é a primeira estrofe do seu poema,
+onde cada linha quebra exatamente onde você deseja.
+Não precisa usar tags br, apenas quebre a linha no teclado.
+
+Aqui começa a segunda estrofe do texto,
+mantendo o espaçamento limpo e clássico
+da poesia tradicional.</pre>
+        </div>
+
+        <!-- POEMA 1 -->
+        <div class="poem-item">
+            <div class="poem-meta">
+                <h2 class="poem-name">Título do Primeiro Poema</h2>
+                <span class="poem-date">January 08, 2026</span>
+            </div>
+<pre class="poem-content">Aqui fica o seu poema mais antigo.
+Se você quiser dar um espaço para dentro na linha,
+    basta usar a barra de espaço ou tab,
+    que a tag pre vai respeitar a sua métrica visual.
+
+Assim fica fácil atualizar manualmente.</pre>
+        </div>
+
     </div>
 
     <!-- FOOTER -->
