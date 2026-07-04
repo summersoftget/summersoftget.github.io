@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>GETULIO - ABOT</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         body {
@@ -18,14 +18,13 @@
             min-height: 100vh;
         }
 
-        /* ----- HEADER ADAPTADO (80PX DE ALTURA) ----- */
         .header.adr {
             width: 100%;
-            height: 80px; /* Força o header a ter exatamente 80px */
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px; /* 10px em cima e embaixo */
+            padding: 10px 20px;
             border-bottom: 1px solid #ddd;
             box-sizing: border-box;
             position: relative;
@@ -64,14 +63,13 @@
             transform: translateX(-50%);
         }
 
-        /* ----- MENU LATERAL (HAMBURGER) ----- */
         .slide-menu-wrap {
             position: fixed;
             top: 0;
             left: -100%; 
             width: 100%;
             max-width: 575px;
-            font-family: "BigHitB", serif; /* Ajustado para manter a consistência ou use "BigHitB" se preferir */
+            font-family: "BigHitB", serif;
             height: 100vh;
             background-color: #ffffff;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
@@ -88,11 +86,10 @@
         }
 
         .slide-body {
-            padding: 80px 40px 20px 40px; /* Ajustado para dar mais elegância ao menu de texto */
+            padding: 80px 40px 20px 40px; 
             position: relative;
         }
 
-        /* Botão Fechar: Apenas o X no canto superior direito */
         .btn-slide-close {
             position: absolute;
             top: 25px;
@@ -106,11 +103,10 @@
         }
 
         .slide-body ul li {
-            margin-bottom: 24px; /* Espaçamento confortável entre os links */
+            margin-bottom: 24px; 
             width: 100%;
         }
 
-        /* Formatação dos links de texto do Menu */
         .slide-body ul li a {
             color: #000000;
             text-decoration: none;
@@ -124,7 +120,6 @@
             opacity: 0.6;
         }
 
-        /* Indicador da página atual (.about) */
         .slide-body ul li strong {
             font-size: 24px;
             text-transform: lowercase;
@@ -137,11 +132,10 @@
             margin-left: 2px;
         }
 
-        /* Redes Sociais no Fundo do Menu */
         .sns-wrap {
             display: flex;
             gap: 15px;
-            padding: 40px; /* Alinhado com o padding do slide-body */
+            padding: 40px;
             margin-top: auto;
         }
 
@@ -151,7 +145,6 @@
             object-fit: contain;
         }
 
-        /* ----- CONTAINER DE CONTEÚDO ----- */
         .content-container {
             max-width: 650px;
             text-align: center;
