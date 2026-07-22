@@ -12,10 +12,16 @@
             width: 100%;
             height: 100%;
             font-family: "Times New Roman", serif;
-            background-color: #ffffff;
+
+            background-image: url("sitefundo.png");
+            background-size: cover;          
+            background-position: center;    
+            background-repeat: no-repeat;   
+            background-attachment: fixed;   
+
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevents accidental bouncing/scrolling */
+            overflow: hidden;
         }
 
         /* Main area takes up all available space, pushing contact info down naturally */
@@ -90,6 +96,45 @@
             margin-top: 4px;
         }
 
+        #background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #main,
+        #contact {
+            position: relative;
+            z-index: 1;
+        }
+
+        #background video {
+            position: absolute;
+            width: clamp(120px, 18vw, 260px);
+            height: auto;      
+            pointer-events: none;
+        }
+
+        #background video:nth-child(1) {
+            top: 8%;
+            left: 6%;
+            transform: rotate(-12deg) scale(0.9);
+        }
+
+        #background video:nth-child(2) {
+            top: 50%;
+            right: 8%;
+            transform: rotate(18deg) scale(1.2);
+        }
+
+        #background video:nth-child(3) {
+            bottom: 10%;
+            left: 42%;
+            transform: rotate(-6deg) scale(0.75);
+        }
+
         
         @media (max-width: 600px) {
             #contact {
@@ -102,6 +147,17 @@
     </style>
 </head>
 <body>
+
+
+<script>
+const videos = document.querySelectorAll("#background video");
+
+videos.forEach(video => {
+    video.addEventListener("loadedmetadata", () => {
+        video.currentTime = Math.random() * video.duration;
+    });
+});
+</script>
 
 <div id="main">
     <div>
@@ -131,6 +187,22 @@
         São Paulo<br>
         Brazil
     </div>
+</div>
+
+<div id="background">
+
+    <video autoplay muted loop playsinline>
+        <source src="squidward.webm" type="video/webm">
+    </video>
+
+    <video autoplay muted loop playsinline>
+        <source src="squidward.webm" type="video/webm">
+    </video>
+
+    <video autoplay muted loop playsinline>
+        <source src="squidward.webm" type="video/webm">
+    </video>
+
 </div>
 
 </body>
