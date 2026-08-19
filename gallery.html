@@ -28,10 +28,10 @@ html, body {
 
 .page {
 
-    width: 96%;
-
-    min-height: 90vh;
-
+    width: calc(100% - 40px); 
+    
+    min-height: calc(100vh - 40px); 
+    
     margin: 20px auto;
 
     background: rgba(255,255,255,1);
@@ -121,6 +121,11 @@ header h1 {
     transition: transform .35s ease,
                 filter .35s ease;
 
+    /* evitar azul */
+    outline: none; /* Remove a borda azul no PC */
+    -webkit-tap-highlight-color: transparent; /* Remove o piscar azul no celular */
+    user-select: none; /* Evita que a imagem seja "selecionada" acidentalmente */
+
 }
 
 
@@ -182,6 +187,9 @@ header h1 {
     font-size:45px;
 
     cursor:pointer;
+
+    /*evitar azul*/
+    -webkit-tap-highlight-color: transparent;
 
 }
 
