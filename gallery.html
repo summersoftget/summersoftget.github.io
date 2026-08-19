@@ -28,11 +28,11 @@ html, body {
 
 .page {
 
-    width: calc(100% - 40px); 
+    width: calc(100% - 30px); 
     
-    min-height: calc(100vh - 40px); 
+    min-height: calc(100vh - 30px); 
     
-    margin: 20px auto;
+    margin: 10px auto;
 
     background: rgba(255,255,255,1);
 
@@ -144,23 +144,28 @@ header h1 {
 #lightbox {
 
     display: none;
-
     position: fixed;
-
     inset: 0;
-
     background: rgba(0,0,0,.85);
-
     z-index: 100;
-
+    
+    /* Mude para flex-direction column para o texto ficar debaixo da foto */
+    flex-direction: column; 
+    
     justify-content: center;
-
     align-items: center;
-
     padding: 20px;
 
 }
 
+#lightbox-caption {
+    color: white;
+    margin-top: 15px;
+    font-size: 18px;
+    text-align: center;
+    max-width: 80%;
+    font-family: "Times New Roman", serif;
+}
 
 #lightbox img {
 
@@ -260,7 +265,7 @@ header h1 {
 <div class="gallery">
 
 
-<img src="images/foto1.png" alt="">
+<img src="images/foto1.png" alt="" data-caption="Teste 1!">
 <img src="images/foto2.png" alt="">
 <img src="images/foto3.png" alt="">
 <img src="images/foto4.png" alt="">
@@ -276,9 +281,11 @@ header h1 {
 
 <div id="lightbox">
 
-<span id="close">&times;</span>
+    <span id="close">&times;</span>
 
-<img id="lightbox-img">
+    <img id="lightbox-img">
+
+    <div id="lightbox-caption"></div>
 
 </div>
 
@@ -298,44 +305,30 @@ const lightboxImg = document.getElementById("lightbox-img");
 
 const close = document.getElementById("close");
 
-
+const lightboxCaption = document.getElementById("lightbox-caption");
 
 images.forEach(img => {
-
-
-    img.addEventListener("click",()=>{
-
-
-        lightbox.style.display="flex";
-
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
         lightboxImg.src = img.src;
-
-
+        
+        const captionText = img.getAttribute("data-caption");
+        if (captionText) {
+            lightboxCaption.textContent = captionText;
+        } else {
+            lightboxCaption.textContent = "";
+        }
     });
-
-
 });
 
-
-
-close.onclick = ()=>{
-
-    lightbox.style.display="none";
-
+close.onclick = () => {
+    lightbox.style.display = "none";
 };
 
-
-
-lightbox.onclick = (e)=>{
-
-
-    if(e.target === lightbox){
-
-        lightbox.style.display="none";
-
+lightbox.onclick = (e) => {
+    if(e.target === lightbox || e.target === lightboxCaption){
+        lightbox.style.display = "none";
     }
-
-
 };
 
 
