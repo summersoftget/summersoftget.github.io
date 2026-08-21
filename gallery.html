@@ -392,8 +392,10 @@ images.forEach(img => {
         const captionText = img.getAttribute("data-caption");
         if (captionText) {
             lightboxCaption.textContent = captionText;
+            lightboxCaption.style.display = "block"; // Mostra a barra de texto
         } else {
             lightboxCaption.textContent = "";
+            lightboxCaption.style.display = "none"; // Esconde a barra completamente
         }
     });
 });
