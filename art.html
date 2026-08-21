@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GETULIO - ArT</title>
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: "Times New Roman", serif;
+
+    /* Imagem para as telas de PC */
+    background-image: url("images/moldura-pc.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* página branca central */
+
+.page {
+
+    width: calc(100% - 30px); 
+    
+    min-height: calc(100vh - 30px); 
+    
+    margin: 10px auto;
+
+    background: rgba(255,255,255,1);
+
+    border: 3px solid black;
+
+    box-shadow:
+        0 0 35px rgba(0,0,0,0.45);
+
+    padding: 40px;
+
+    box-sizing: border-box;
+
+}
+
+
+@media(max-width:600px){
+
+    /* ADICIONE ESTE BLOCO AQUI */
+    html, body {
+        /* Imagem que será carregada apenas no celular */
+        background-image: url("images/moldura-mobile.jpg");
+    }
+
+    .page {
+        width: 94%;
+        min-height: calc(100vh - 20px);
+        margin: 10px auto;
+        padding: 20px;
+        border-width: 2px;
+    }
+}
+
+
+/* topo */
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    font-size: clamp(28px, 5vw, 45px);
+    font-style: italic;
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* GALERIA */
+
+.gallery {
+
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+
+.gallery img {
+
+    width: 100%;
+    height: 260px;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+
+    transition: transform .35s ease,
+                filter .35s ease;
+
+    /* evitar azul */
+    outline: none; /* Remove a borda azul no PC */
+    -webkit-tap-highlight-color: transparent; /* Remove o piscar azul no celular */
+    user-select: none; /* Evita que a imagem seja "selecionada" acidentalmente */
+
+}
+
+
+.gallery img:hover {
+
+    transform: scale(1.04);
+
+    filter: brightness(0.9);
+
+}
+
+
+
+/* FUNDO DO LIGHTBOX */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* Fundo um pouco mais claro para dar destaque à janela */
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* EFEITO AERO GLASS (JANELA) */
+.win7-window {
+    /* Azul/branco translúcido característico do Win7 */
+    background: rgba(185, 209, 234, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px 8px 6px 6px;
+    
+    /* Sombras e brilhos para dar volume 3D */
+    box-shadow:
+        inset 0 0 2px rgba(255, 255, 255, 1),
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 0, 0, 0.3);
+        
+    /* O truque do vidro fosco (Desfoque do que está atrás) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    max-height: 95vh;
+    padding: 6px; /* Espessura da "borda de vidro" */
+}
+
+/* BARRA DE TÍTULO */
+.win7-titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 4px 6px 4px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    cursor: default;
+}
+
+.win7-title {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    color: #000;
+    font-weight: 600;
+}
+
+/* BOTÕES DE CONTROLE DA JANELA */
+.win7-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.win7-btn {
+    width: 28px;
+    height: 19px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #f3f8fd 0%, #d4e0ef 50%, #b2c9e5 51%, #c9daf4 100%);
+    box-shadow: inset 0 0 1px white;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win7-btn:hover {
+    background: linear-gradient(to bottom, #e3f0fc 0%, #c1d5eb 50%, #a4bfe2 51%, #b3cdef 100%);
+}
+
+/* BOTÃO FECHAR VERMELHO */
+.win7-btn.win7-close {
+    background: linear-gradient(to bottom, #f8b5a9 0%, #e86558 50%, #d93829 51%, #e66c61 100%);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+        
+.win7-btn.win7-close:hover {
+    background: linear-gradient(to bottom, #fccec6 0%, #f08378 50%, #e34c3e 51%, #f08b83 100%);
+    box-shadow: inset 0 0 2px white, 0 0 3px rgba(227, 76, 62, 0.8);
+}
+
+/* ÁREA BRANCA INTERNA (ONDE FICA A FOTO) */
+.win7-content {
+    background: #ffffff;
+    border: 1px solid #7a7a7a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+#lightbox-img {
+    max-width: 100%;
+    /* Altura máxima descontando o tamanho da janela para a imagem não estourar a tela */
+    max-height: calc(90vh - 100px); 
+    object-fit: contain;
+}
+
+/* TEXTO DA IMAGEM */
+#lightbox-caption {
+    color: #333; /* Texto escuro pois agora o fundo é claro */
+    padding: 12px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f0f0f0; /* Fundo cinza estilo interface do Windows */
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #ccc;
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .gallery {
+
+        width: 94%;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 12px;
+
+    }
+
+
+    .gallery img {
+
+        height: 170px;
+
+    }
+
+
+    header {
+
+        padding:20px 10px;
+
+    }
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<header>
+
+<h1>art</h1>
+
+
+<div class="nav-links">
+
+<a href="index.html">home</a> //
+
+<a href="art.html">art</a> //
+
+<a href="texts.html">texts</a> //
+
+<a href="projects.html">projects</a>
+
+</div>
+
+
+</header>
+
+
+
+<div class="gallery">
+
+
+<img src="images/foto1.png" alt="" data-caption="Teste 1!">
+<img src="images/foto2.png" alt="">
+<img src="images/foto3.png" alt="">
+<img src="images/foto4.png" alt="">
+<img src="images/foto5.png" alt="">
+<img src="photos/foto6.jpg" alt="">
+<img src="photos/foto7.jpg" alt="">
+<img src="photos/foto8.jpg" alt="">
+
+
+</div>
+
+
+
+<div id="lightbox">
+    <!-- Caixa principal da janela do Windows 7 -->
+    <div class="win7-window">
+        
+        <!-- Barra de Título -->
+        <div class="win7-titlebar">
+            <span class="win7-title">Visualizador de Fotos do Windows</span>
+            <div class="win7-controls">
+                <div class="win7-btn win7-min">-</div>
+                <div class="win7-btn win7-max">□</div>
+                <!-- O seu botão de fechar original, agora com cara de Win7 -->
+                <div class="win7-btn win7-close" id="close">&times;</div>
+            </div>
+        </div>
+
+        <!-- Área onde a foto e o texto vão ficar -->
+        <div class="win7-content">
+            <img id="lightbox-img">
+            <div id="lightbox-caption"></div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+<script>
+
+
+const images = document.querySelectorAll(".gallery img");
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+const close = document.getElementById("close");
+
+const lightboxCaption = document.getElementById("lightbox-caption");
+
+images.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+        
+        const captionText = img.getAttribute("data-caption");
+        if (captionText) {
+            lightboxCaption.textContent = captionText;
+            lightboxCaption.style.display = "block"; // Mostra a barra de texto
+        } else {
+            lightboxCaption.textContent = "";
+            lightboxCaption.style.display = "none"; // Esconde a barra completamente
+        }
+    });
+});
+
+close.onclick = () => {
+    lightbox.style.display = "none";
+};
+
+lightbox.onclick = (e) => {
+    if(e.target === lightbox || e.target === lightboxCaption){
+        lightbox.style.display = "none";
+    }
+};
+
+
+
+</script>
+
+
+</body>
+</html>
