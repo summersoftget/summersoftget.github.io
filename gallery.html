@@ -139,42 +139,126 @@ header h1 {
 
 
 
-/* LIGHTBOX */
-
+/* FUNDO DO LIGHTBOX */
 #lightbox {
-
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.85);
+    background: rgba(0, 0, 0, 0.4); /* Fundo um pouco mais claro para dar destaque à janela */
     z-index: 100;
-    
-    /* Mude para flex-direction column para o texto ficar debaixo da foto */
-    flex-direction: column; 
-    
     justify-content: center;
     align-items: center;
     padding: 20px;
-
 }
 
-#lightbox-caption {
-    color: white;
-    margin-top: 15px;
-    font-size: 18px;
-    text-align: center;
-    max-width: 80%;
-    font-family: "Times New Roman", serif;
-}
-
-#lightbox img {
-
+/* EFEITO AERO GLASS (JANELA) */
+.win7-window {
+    /* Azul/branco translúcido característico do Win7 */
+    background: rgba(185, 209, 234, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px 8px 6px 6px;
+    
+    /* Sombras e brilhos para dar volume 3D */
+    box-shadow:
+        inset 0 0 2px rgba(255, 255, 255, 1),
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 0, 0, 0.3);
+        
+    /* O truque do vidro fosco (Desfoque do que está atrás) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    display: flex;
+    flex-direction: column;
     max-width: 95%;
+    max-height: 95vh;
+    padding: 6px; /* Espessura da "borda de vidro" */
+}
 
-    max-height: 90vh;
+/* BARRA DE TÍTULO */
+.win7-titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 4px 6px 4px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    cursor: default;
+}
 
+.win7-title {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    color: #000;
+    font-weight: 600;
+}
+
+/* BOTÕES DE CONTROLE DA JANELA */
+.win7-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.win7-btn {
+    width: 28px;
+    height: 19px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #f3f8fd 0%, #d4e0ef 50%, #b2c9e5 51%, #c9daf4 100%);
+    box-shadow: inset 0 0 1px white;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win7-btn:hover {
+    background: linear-gradient(to bottom, #e3f0fc 0%, #c1d5eb 50%, #a4bfe2 51%, #b3cdef 100%);
+}
+
+/* BOTÃO FECHAR VERMELHO */
+.win7-btn.win7-close {
+    background: linear-gradient(to bottom, #f8b5a9 0%, #e86558 50%, #d93829 51%, #e66c61 100%);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+        
+.win7-btn.win7-close:hover {
+    background: linear-gradient(to bottom, #fccec6 0%, #f08378 50%, #e34c3e 51%, #f08b83 100%);
+    box-shadow: inset 0 0 2px white, 0 0 3px rgba(227, 76, 62, 0.8);
+}
+
+/* ÁREA BRANCA INTERNA (ONDE FICA A FOTO) */
+.win7-content {
+    background: #ffffff;
+    border: 1px solid #7a7a7a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+#lightbox-img {
+    max-width: 100%;
+    /* Altura máxima descontando o tamanho da janela para a imagem não estourar a tela */
+    max-height: calc(90vh - 100px); 
     object-fit: contain;
+}
 
+/* TEXTO DA IMAGEM */
+#lightbox-caption {
+    color: #333; /* Texto escuro pois agora o fundo é claro */
+    padding: 12px;
+    font-size: 15px;
+    text-align: center;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f0f0f0; /* Fundo cinza estilo interface do Windows */
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #ccc;
 }
 
 
@@ -280,13 +364,27 @@ header h1 {
 
 
 <div id="lightbox">
+    <!-- Caixa principal da janela do Windows 7 -->
+    <div class="win7-window">
+        
+        <!-- Barra de Título -->
+        <div class="win7-titlebar">
+            <span class="win7-title">Visualizador de Fotos do Windows</span>
+            <div class="win7-controls">
+                <div class="win7-btn win7-min">-</div>
+                <div class="win7-btn win7-max">□</div>
+                <!-- O seu botão de fechar original, agora com cara de Win7 -->
+                <div class="win7-btn win7-close" id="close">&times;</div>
+            </div>
+        </div>
 
-    <span id="close">&times;</span>
+        <!-- Área onde a foto e o texto vão ficar -->
+        <div class="win7-content">
+            <img id="lightbox-img">
+            <div id="lightbox-caption"></div>
+        </div>
 
-    <img id="lightbox-img">
-
-    <div id="lightbox-caption"></div>
-
+    </div>
 </div>
 
 </div>
