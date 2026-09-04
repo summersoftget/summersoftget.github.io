@@ -120,14 +120,16 @@
         #main,
         #contact {
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
+        /* Configuração para Monitores (PC) */
         #background video {
             position: absolute;
             width: clamp(140px, 28vw, 260px);
             height: auto;      
             pointer-events: none;
+            z-index: 2; /* Fica por cima das nuvens */
         }
 
         #background video:nth-of-type(1) {
@@ -160,8 +162,10 @@
             pointer-events: none;
             will-change: transform;
             opacity: 1; 
+            z-index: 1; /* Fica atrás dos vídeos */
         }
 
+        /* Ajustes exclusivos para Celular */
         @media (max-width: 600px) {
             #contact {
                 position: static; 
@@ -171,7 +175,7 @@
             }
 
             #background video {
-                width: clamp(150px, 42vw, 220px);
+                width: clamp(80px, 26vw, 130px);
             }
         }
     </style>
@@ -248,19 +252,18 @@ function resetCloud(img, initial = false) {
     const topPos = Math.random() * 78 + 2;
     img.style.top = topPos + "%";
 
-    // Tamanho adaptável: varia de 120px a 400px dependendo da largura do monitor
-    const minVW = Math.floor(Math.random() * 15) + 10; // 10vw a 25vw
-    const minPx = Math.floor(Math.random() * 60) + 100; // 100px a 160px
-    const maxPx = Math.floor(Math.random() * 180) + 220; // 220px a 400px
+    // Tamanho adaptável: varia de 100px até 400px no PC
+    const minVW = Math.floor(Math.random() * 15) + 10;
+    const minPx = Math.floor(Math.random() * 60) + 100;
+    const maxPx = Math.floor(Math.random() * 180) + 220;
     img.style.width = `clamp(${minPx}px, ${minVW}vw, ${maxPx}px)`;
 
-    // Estimativa de largura base para calcular trajetos fora da tela
     const approxWidth = maxPx;
 
     // Velocidades variadas (30s a 130s)
     const duration = Math.random() * 100 + 30;
 
-    // Espaçamento horizontal inicial e recomeço
+    // Espaçamento horizontal
     const randomOffset = Math.random() * 350 + 50; 
     const startX = initial 
         ? (Math.random() * (window.innerWidth + approxWidth)) - approxWidth 
@@ -292,7 +295,8 @@ function resetCloud(img, initial = false) {
 for (let i = 0; i < NUM_CLOUDS; i++) {
     const cloud = document.createElement("img");
     cloud.classList.add("cloud");
-    bgContainer.appendChild(cloud);
+    // Inserimos a nuvem antes dos vídeos para reforçar a hierarquia visual
+    bgContainer.prepend(cloud);
     resetCloud(cloud, true);
 }
 </script>
