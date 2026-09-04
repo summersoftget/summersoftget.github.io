@@ -123,7 +123,6 @@
             z-index: 1;
         }
 
-        /* VÍDEOS (Lula Molusco): maiores no PC e principalmente no celular */
         #background video {
             position: absolute;
             width: clamp(140px, 28vw, 260px);
@@ -155,7 +154,6 @@
             transform: rotate(-24deg) scale(1.05);
         }
 
-        /* Nuvens sem opacidade reduzida */
         .cloud {
             position: absolute;
             height: auto;
@@ -172,7 +170,6 @@
                 font-size: 13px;
             }
 
-            /* Garante destaque extra dos vídeos em telas pequenas */
             #background video {
                 width: clamp(150px, 42vw, 220px);
             }
@@ -239,7 +236,7 @@ videos.forEach(video => {
     });
 });
 
-// --- NUVENS ALEATÓRIAS E ESPALHADAS ---
+// --- NUVENS ALEATÓRIAS E MAIORES NO PC ---
 const bgContainer = document.getElementById("background");
 const cloudImages = ["nuvem1.png", "nuvem2.png"]; 
 const NUM_CLOUDS = 8; 
@@ -247,22 +244,27 @@ const NUM_CLOUDS = 8;
 function resetCloud(img, initial = false) {
     img.src = cloudImages[Math.floor(Math.random() * cloudImages.length)];
     
-    // Posição vertical bem espalhada (entre 2% e 80% da altura da tela)
+    // Posição vertical espalhada (2% a 78%)
     const topPos = Math.random() * 78 + 2;
     img.style.top = topPos + "%";
 
-    // Tamanhos variados (entre 90px e 260px)
-    const width = Math.floor(Math.random() * 170) + 90;
-    img.style.width = width + "px";
+    // Tamanho adaptável: varia de 120px a 400px dependendo da largura do monitor
+    const minVW = Math.floor(Math.random() * 15) + 10; // 10vw a 25vw
+    const minPx = Math.floor(Math.random() * 60) + 100; // 100px a 160px
+    const maxPx = Math.floor(Math.random() * 180) + 220; // 220px a 400px
+    img.style.width = `clamp(${minPx}px, ${minVW}vw, ${maxPx}px)`;
 
-    // Velocidades bem diferentes (entre 30s as mais rápidas até 130s as mais lentas)
+    // Estimativa de largura base para calcular trajetos fora da tela
+    const approxWidth = maxPx;
+
+    // Velocidades variadas (30s a 130s)
     const duration = Math.random() * 100 + 30;
 
-    // Espaçamento horizontal inicial e recomeço recuado para não acumularem
-    const randomOffset = Math.random() * 300 + 50; 
+    // Espaçamento horizontal inicial e recomeço
+    const randomOffset = Math.random() * 350 + 50; 
     const startX = initial 
-        ? (Math.random() * (window.innerWidth + width)) - width 
-        : -width - randomOffset;
+        ? (Math.random() * (window.innerWidth + approxWidth)) - approxWidth 
+        : -approxWidth - randomOffset;
 
     const endX = window.innerWidth + 100;
 
