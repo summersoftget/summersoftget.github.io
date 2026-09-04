@@ -27,30 +27,19 @@ html, body {
 /* página branca central */
 
 .page {
-
     width: calc(100% - 30px); 
-    
     min-height: calc(100vh - 30px); 
-    
     margin: 10px auto;
-
     background: rgba(255,255,255,1);
-
     border: 3px solid black;
-
-    box-shadow:
-        0 0 35px rgba(0,0,0,0.45);
-
+    box-shadow: 0 0 35px rgba(0,0,0,0.45);
     padding: 40px;
-
     box-sizing: border-box;
-
 }
 
 
 @media(max-width:600px){
 
-    /* ADICIONE ESTE BLOCO AQUI */
     html, body {
         /* Imagem que será carregada apenas no celular */
         background-image: url("images/moldura-mobile.jpg");
@@ -93,58 +82,41 @@ header h1 {
 /* GALERIA */
 
 .gallery {
-
     width: 90%;
     max-width: 1200px;
-
     margin: 40px auto;
-
     display: grid;
-
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
     gap: 20px;
 }
 
 
 .gallery img {
-
     width: 100%;
     height: 260px;
-
     object-fit: cover;
-
     cursor: pointer;
-
     border-radius: 4px;
-
-    transition: transform .35s ease,
-                filter .35s ease;
-
-    /* evitar azul */
-    outline: none; /* Remove a borda azul no PC */
-    -webkit-tap-highlight-color: transparent; /* Remove o piscar azul no celular */
-    user-select: none; /* Evita que a imagem seja "selecionada" acidentalmente */
-
+    transition: transform .35s ease, filter .35s ease;
+    outline: none; 
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none; 
 }
 
 
 .gallery img:hover {
-
     transform: scale(1.04);
-
     filter: brightness(0.9);
-
 }
 
 
 
-/* FUNDO DO LIGHTBOX */
-#lightbox {
+/* FUNDO DO LIGHTBOX E DA POPUP DE BOAS-VINDAS */
+#lightbox, #welcome-modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* Fundo um pouco mais claro para dar destaque à janela */
+    background: rgba(0, 0, 0, 0.4); 
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -153,27 +125,21 @@ header h1 {
 
 /* EFEITO AERO GLASS (JANELA) */
 .win7-window {
-    /* Azul/branco translúcido característico do Win7 */
     background: rgba(185, 209, 234, 0.45); 
     border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 8px 8px 6px 6px;
-    
-    /* Sombras e brilhos para dar volume 3D */
     box-shadow:
         inset 0 0 2px rgba(255, 255, 255, 1),
         inset 0 0 10px rgba(255, 255, 255, 0.3),
         0 10px 25px rgba(0, 0, 0, 0.6),
         0 0 0 1px rgba(0, 0, 0, 0.3);
-        
-    /* O truque do vidro fosco (Desfoque do que está atrás) */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    
     display: flex;
     flex-direction: column;
     max-width: 95%;
     max-height: 95vh;
-    padding: 6px; /* Espessura da "borda de vidro" */
+    padding: 6px; 
 }
 
 /* BARRA DE TÍTULO */
@@ -231,7 +197,7 @@ header h1 {
     box-shadow: inset 0 0 2px white, 0 0 3px rgba(227, 76, 62, 0.8);
 }
 
-/* ÁREA BRANCA INTERNA (ONDE FICA A FOTO) */
+/* ÁREA BRANCA INTERNA */
 .win7-content {
     background: #ffffff;
     border: 1px solid #7a7a7a;
@@ -243,24 +209,47 @@ header h1 {
 
 #lightbox-img {
     max-width: 100%;
-    /* Altura máxima descontando o tamanho da janela para a imagem não estourar a tela */
     max-height: calc(90vh - 100px); 
     object-fit: contain;
 }
 
-/* TEXTO DA IMAGEM */
-#lightbox-caption {
-    color: #333; /* Texto escuro pois agora o fundo é claro */
+/* TEXTO DA IMAGEM E POPUP */
+#lightbox-caption, .win7-body-text {
+    color: #333; 
     padding: 12px;
     font-size: 15px;
     text-align: center;
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #f0f0f0; /* Fundo cinza estilo interface do Windows */
+    background: #f0f0f0; 
     width: 100%;
     box-sizing: border-box;
     border-top: 1px solid #ccc;
 }
 
+/* ESTILOS ESPECÍFICOS DA JANELA DE BOAS VINDAS */
+.win7-welcome-content {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 280px;
+}
+
+.win7-welcome-logo {
+    max-width: 64px;
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.win7-welcome-text p {
+    margin: 6px 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    color: #111;
+}
 
 
 /* MOBILE */
@@ -268,31 +257,20 @@ header h1 {
 @media(max-width:600px){
 
     .gallery {
-
         width: 94%;
-
         grid-template-columns: repeat(2, 1fr);
-
         gap: 12px;
-
     }
-
 
     .gallery img {
-
         height: 170px;
-
     }
 
-
     header {
-
         padding:20px 10px;
-
     }
 
 }
-
 
 </style>
 
@@ -307,26 +285,16 @@ header h1 {
 
 <h1>art</h1>
 
-
 <div class="nav-links">
-
 <a href="index.html">home</a> //
-
 <a href="gallery.html">gallery</a> //
-
 <a href="texts.html">texts</a> //
-
 <a href="projects.html">projects</a>
-
 </div>
-
 
 </header>
 
-
-
 <div class="gallery">
-
 
 <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518626/foto2.png" alt="" data-caption="Tem chances que eu goste de desenhar o Handsome Squidward (talvez)">
 <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518646/foto3.png" alt="" data-caption="gosto das cores">
@@ -344,57 +312,53 @@ header h1 {
 <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518614/WhatsApp_Image_2026-08-23_at_17.36.50.jpg" alt="" data-caption="prince e moebius">
 <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518615/WhatsApp_Image_2026-08-23_at_17.36.51.jpg" alt="" data-caption="Dewey do Malcolm in the Middle se nascesse levemente defeituoso">
 
-
-
-
-
-
-
-
 </div>
 
-
-
 <div id="lightbox">
-    <!-- Caixa principal da janela do Windows 7 -->
     <div class="win7-window">
-        
-        <!-- Barra de Título -->
         <div class="win7-titlebar">
             <span class="win7-title">Visualizador de Fotos do Getulio</span>
             <div class="win7-controls">
                 <div class="win7-btn win7-min">-</div>
                 <div class="win7-btn win7-max">□</div>
-                <!-- O seu botão de fechar original, agora com cara de Win7 -->
                 <div class="win7-btn win7-close" id="close">&times;</div>
             </div>
         </div>
-
-        <!-- Área onde a foto e o texto vão ficar -->
         <div class="win7-content">
             <img id="lightbox-img">
             <div id="lightbox-caption"></div>
         </div>
+    </div>
+</div>
 
+<div id="welcome-modal">
+    <div class="win7-window">
+        <div class="win7-titlebar">
+            <span class="win7-title">Aviso do Sistema</span>
+            <div class="win7-controls">
+                <div class="win7-btn win7-close" id="close-welcome">&times;</div>
+            </div>
+        </div>
+        <div class="win7-content">
+            <div class="win7-welcome-content">
+                <img src="logo.png" alt="Logo" class="win7-welcome-logo">
+                <div class="win7-welcome-text">
+                    <p>Você pode clicar na imagem para ver comentários;</p>
+                    <p>se divirta!</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 </div>
 
-
-
-
 <script>
 
-
 const images = document.querySelectorAll(".gallery img");
-
 const lightbox = document.getElementById("lightbox");
-
 const lightboxImg = document.getElementById("lightbox-img");
-
 const close = document.getElementById("close");
-
 const lightboxCaption = document.getElementById("lightbox-caption");
 
 images.forEach(img => {
@@ -405,10 +369,10 @@ images.forEach(img => {
         const captionText = img.getAttribute("data-caption");
         if (captionText) {
             lightboxCaption.textContent = captionText;
-            lightboxCaption.style.display = "block"; // Mostra a barra de texto
+            lightboxCaption.style.display = "block"; 
         } else {
             lightboxCaption.textContent = "";
-            lightboxCaption.style.display = "none"; // Esconde a barra completamente
+            lightboxCaption.style.display = "none"; 
         }
     });
 });
@@ -423,10 +387,31 @@ lightbox.onclick = (e) => {
     }
 };
 
+/* LÓGICA DE PRIMEIRO ACESSO */
+const welcomeModal = document.getElementById("welcome-modal");
+const closeWelcome = document.getElementById("close-welcome");
 
+window.addEventListener("DOMContentLoaded", () => {
+    const hasVisited = localStorage.getItem("hasVisitedArt");
+    
+    if (!hasVisited) {
+        welcomeModal.style.display = "flex";
+    }
+});
+
+const hideWelcome = () => {
+    welcomeModal.style.display = "none";
+    localStorage.setItem("hasVisitedArt", "true");
+};
+
+closeWelcome.onclick = hideWelcome;
+welcomeModal.onclick = (e) => {
+    if (e.target === welcomeModal) {
+        hideWelcome();
+    }
+};
 
 </script>
-
 
 </body>
 </html>
