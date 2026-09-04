@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GETULIO - Projects</title>
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: "Times New Roman", serif;
+
+    /* Imagem para as telas de PC */
+    background-image: url("images/moldura-pc.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* página branca central */
+
+.page {
+    width: calc(100% - 30px); 
+    min-height: calc(100vh - 30px); 
+    margin: 10px auto;
+    background: rgba(255,255,255,1);
+    border: 3px solid black;
+    box-shadow: 0 0 35px rgba(0,0,0,0.45);
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+
+@media(max-width:600px){
+
+    html, body {
+        /* Imagem que será carregada apenas no celular */
+        background-image: url("images/moldura-mobile.jpg");
+    }
+
+    .page {
+        width: 94%;
+        min-height: calc(100vh - 20px);
+        margin: 10px auto;
+        padding: 20px;
+        border-width: 2px;
+    }
+}
+
+
+/* topo */
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    font-size: clamp(28px, 5vw, 45px);
+    font-style: italic;
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* VITRINE DE PROJETOS */
+
+.projects-grid {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.project-card {
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border-color: #000;
+}
+
+.project-thumb {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.project-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.project-title {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 6px 0;
+    color: #111;
+}
+
+.project-subtitle {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    color: #666;
+    margin: 0 0 14px 0;
+    line-height: 1.4;
+}
+
+/* TAGS CUSTOMIZÁVEIS (PILLS) */
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.tag {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px; /* Borda circular */
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Cores customizáveis para as tecnologias */
+.tag-html { background-color: #e44d26; }
+.tag-css { background-color: #264de4; }
+.tag-js { background-color: #f7df1e; color: #000; }
+.tag-react { background-color: #61dafb; color: #000; }
+.tag-node { background-color: #68a063; }
+.tag-python { background-color: #3776ab; }
+.tag-ai { background-color: #f309f3; }
+
+
+/* FUNDO DO LIGHTBOX E DA POPUP DE BOAS-VINDAS */
+#lightbox, #welcome-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* EFEITO AERO GLASS (JANELA) */
+.win7-window {
+    background: rgba(185, 209, 234, 0.45); 
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px 8px 6px 6px;
+    box-shadow:
+        inset 0 0 2px rgba(255, 255, 255, 1),
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 10px 25px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    max-height: 95vh;
+    padding: 6px; 
+}
+
+/* BARRA DE TÍTULO */
+.win7-titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 4px 6px 4px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    cursor: default;
+}
+
+.win7-title {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    color: #000;
+    font-weight: 600;
+}
+
+/* BOTÕES DE CONTROLE DA JANELA */
+.win7-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.win7-btn {
+    width: 28px;
+    height: 19px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #f3f8fd 0%, #d4e0ef 50%, #b2c9e5 51%, #c9daf4 100%);
+    box-shadow: inset 0 0 1px white;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win7-btn:hover {
+    background: linear-gradient(to bottom, #e3f0fc 0%, #c1d5eb 50%, #a4bfe2 51%, #b3cdef 100%);
+}
+
+/* BOTÃO FECHAR VERMELHO */
+.win7-btn.win7-close {
+    background: linear-gradient(to bottom, #f8b5a9 0%, #e86558 50%, #d93829 51%, #e66c61 100%);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+        
+.win7-btn.win7-close:hover {
+    background: linear-gradient(to bottom, #fccec6 0%, #f08378 50%, #e34c3e 51%, #f08b83 100%);
+    box-shadow: inset 0 0 2px white, 0 0 3px rgba(227, 76, 62, 0.8);
+}
+
+/* ÁREA BRANCA INTERNA */
+.win7-content {
+    background: #ffffff;
+    border: 1px solid #7a7a7a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ESTILOS ESPECÍFICOS DA JANELA DE BOAS VINDAS */
+.win7-welcome-content {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 280px;
+}
+
+.win7-welcome-logo {
+    max-width: 64px;
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.win7-welcome-text p {
+    margin: 6px 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    color: #111;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .projects-grid {
+        width: 94%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    header {
+        padding:20px 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+<header>
+
+<h1>projects</h1>
+
+<div class="nav-links">
+<a href="index.html">home</a> //
+<a href="gallery.html">gallery</a> //
+<a href="art.html">art</a> //
+<a href="texts.html">texts</a>
+</div>
+
+</header>
+
+<div class="projects-grid">
+
+    <a href="https://github.com" target="_blank" class="project-card">
+        <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518626/foto1.png" alt="Projeto 1" class="project-thumb">
+        <div class="project-info">
+            <h2 class="project-title">Personality Copy Bot</h2>
+            <p class="project-subtitle">You upload a whatsapp chat history and the bot steals the user's personality via LangChain, RAG and FAISS.</p>
+            <div class="project-tags">
+                <span class="tag tag-python">Python</span>
+                <span class="tag tag-ai">AI</span>
+            </div>
+        </div>
+    </a>
+
+
+    <!--
+    <a href="https://github.com" target="_blank" class="project-card">
+        <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787518646/foto3.png" alt="Projeto 2" class="project-thumb">
+        <div class="project-info">
+            <h2 class="project-title">Galeria Interativa</h2>
+            <p class="project-subtitle">Vitrine interativa para exibição de artes digitais e fotografias.</p>
+            <div class="project-tags">
+                <span class="tag tag-react">React</span>
+                <span class="tag tag-css">CSS</span>
+            </div>
+        </div>
+    </a>
+
+    <a href="https://github.com" target="_blank" class="project-card">
+        <img src="https://res.cloudinary.com/knjiu77x/image/upload/v1787525432/7c8ea8f7-10ba-445c-88ba-588625ad3c4e.png" alt="Projeto 3" class="project-thumb">
+        <div class="project-info">
+            <h2 class="project-title">Bot de Automação</h2>
+            <p class="project-subtitle">Script de integração e processamento automático de dados.</p>
+            <div class="project-tags">
+                <span class="tag tag-python">Python</span>
+                <span class="tag tag-node">Node.js</span>
+            </div>
+        </div>
+    </a>
+
+</div>
+
+<div id="welcome-modal">
+    <div class="win7-window">
+        <div class="win7-titlebar">
+            <span class="win7-title">Aviso do Sistema</span>
+            <div class="win7-controls">
+                <div class="win7-btn win7-close" id="close-welcome">&times;</div>
+            </div>
+        </div>
+        <div class="win7-content">
+            <div class="win7-welcome-content">
+                <img src="logo.png" alt="Logo" class="win7-welcome-logo">
+                <div class="win7-welcome-text">
+                    <p>Você pode clicar nos cards para ver os projetos;</p>
+                    <p>se divirta!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+</div>
+
+<script>
+
+/* LÓGICA DE PRIMEIRO ACESSO */
+const welcomeModal = document.getElementById("welcome-modal");
+const closeWelcome = document.getElementById("close-welcome");
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hasVisited = localStorage.getItem("hasVisitedProjects");
+    
+    if (!hasVisited) {
+        welcomeModal.style.display = "flex";
+    }
+});
+
+const hideWelcome = () => {
+    welcomeModal.style.display = "none";
+    localStorage.setItem("hasVisitedProjects", "true");
+};
+
+closeWelcome.onclick = hideWelcome;
+welcomeModal.onclick = (e) => {
+    if (e.target === welcomeModal) {
+        hideWelcome();
+    }
+};
+
+</script>
+
+</body>
+</html>
