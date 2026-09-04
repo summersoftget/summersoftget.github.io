@@ -136,25 +136,25 @@
             pointer-events: none;
         }
 
-        #background video:nth-child(1) {
+        #background video:nth-of-type(1) {
             top: 8%;
             left: 6%;
             transform: rotate(-12deg) scale(0.9);
         }
 
-        #background video:nth-child(2) {
+        #background video:nth-of-type(2) {
             top: 50%;
             right: 8%;
             transform: rotate(18deg) scale(1.2);
         }
 
-        #background video:nth-child(3) {
+        #background video:nth-of-type(3) {
             bottom: 8%;
             left: 35%;
             transform: rotate(-6deg) scale(0.75);
         }
 
-        #background video:nth-child(4) {
+        #background video:nth-of-type(4) {
             top: 5%;
             right: 12%;
             transform: rotate(-24deg) scale(0.75);
@@ -175,7 +175,7 @@
 
         .cloud--1 {
             top: 10%;
-            animation-duration: 45s;
+            animation-duration: 100s;
             animation-delay: 0s;
         }
 
@@ -183,23 +183,23 @@
             top: 22%;
             width: clamp(70px, 16vw, 190px);
             opacity: 0.8;
-            animation-duration: 60s;
-            animation-delay: -15s; /* já entra "no meio" do trajeto */
+            animation-duration: 130s;
+            animation-delay: -40s; /* já entra "no meio" do trajeto */
         }
 
         .cloud--3 {
             top: 4%;
             width: clamp(110px, 26vw, 300px);
-            animation-duration: 55s;
-            animation-delay: -30s;
+            animation-duration: 120s;
+            animation-delay: -70s;
         }
 
         .cloud--4 {
             top: 32%;
             width: clamp(60px, 14vw, 160px);
             opacity: 0.7;
-            animation-duration: 38s;
-            animation-delay: -8s;
+            animation-duration: 85s;
+            animation-delay: -20s;
         }
 
         @keyframes cloud-drift {
@@ -269,6 +269,10 @@
 
 <div id="background">
 
+    <img src="nuvem1.png" class="cloud cloud--1" alt="">
+    <img src="nuvem2.png" class="cloud cloud--2" alt="">
+    <img src="nuvem1.png" class="cloud cloud--3" alt="">
+    <img src="nuvem2.png" class="cloud cloud--4" alt="">
     <img src="nuvem1.png" class="cloud cloud--1" alt="">
     <img src="nuvem2.png" class="cloud cloud--2" alt="">
     <img src="nuvem2.png" class="cloud cloud--3" alt="">
