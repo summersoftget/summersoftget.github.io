@@ -12,20 +12,16 @@
             width: 100%;
             height: 100%;
             font-family: "Times New Roman", serif;
-
             background-image: url("sitefundo.png");
             background-size: cover;          
             background-position: center;    
             background-repeat: no-repeat;   
             background-attachment: fixed;   
-
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        /* No celular, "fixed" costuma dar problema (o Safari trava/zoom a imagem),
-           então trocamos para "scroll" e garantimos que a imagem continue cobrindo a tela toda. */
         @media (max-width: 600px) {
             html, body {
                 background-attachment: scroll;
@@ -34,7 +30,6 @@
             }
         }
 
-        /* Main area takes up all available space, pushing contact info down naturally */
         #main {
             flex: 1;
             display: flex;
@@ -62,7 +57,7 @@
             filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.35)); 
             cursor: pointer;
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-                filter 0.4s ease;
+                        filter 0.4s ease;
         }
 
         .responsive-logo:hover {
@@ -99,7 +94,6 @@
             transform: scale(1.1);
         }
 
-       
         #contact {
             position: fixed;
             right: 16px;
@@ -131,111 +125,43 @@
 
         #background video {
             position: absolute;
-            width: clamp(120px, 18vw, 260px);
+            width: clamp(80px, 20vw, 200px);
             height: auto;      
             pointer-events: none;
         }
 
         #background video:nth-of-type(1) {
-            top: 8%;
-            left: 6%;
+            top: 8vh;
+            left: 5vw;
             transform: rotate(-12deg) scale(0.9);
         }
 
         #background video:nth-of-type(2) {
-            top: 50%;
-            right: 8%;
-            transform: rotate(18deg) scale(1.2);
+            top: 45vh;
+            right: 5vw;
+            transform: rotate(18deg) scale(1.1);
         }
 
         #background video:nth-of-type(3) {
-            bottom: 8%;
-            left: 35%;
-            transform: rotate(-6deg) scale(0.75);
+            bottom: 10vh;
+            left: 20vw;
+            transform: rotate(-6deg) scale(0.8);
         }
 
         #background video:nth-of-type(4) {
-            top: 5%;
-            right: 12%;
-            transform: rotate(-24deg) scale(0.75);
+            top: 12vh;
+            right: 10vw;
+            transform: rotate(-24deg) scale(0.85);
         }
 
-        /* ---- Nuvens passando no fundo ---- */
+        /* Classe base das nuvens */
         .cloud {
             position: absolute;
-            width: clamp(90px, 22vw, 260px);
             height: auto;
-            opacity: 0.9;
             pointer-events: none;
             will-change: transform;
-            animation-name: cloud-drift;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
         }
 
-        .cloud--1 {
-            top: 10%;
-            animation-duration: 100s;
-            animation-delay: 0s;
-        }
-
-        .cloud--2 {
-            top: 22%;
-            width: clamp(70px, 16vw, 190px);
-            opacity: 0.8;
-            animation-duration: 130s;
-            animation-delay: -40s; /* já entra "no meio" do trajeto */
-        }
-
-        .cloud--3 {
-            top: 4%;
-            width: clamp(110px, 26vw, 300px);
-            animation-duration: 120s;
-            animation-delay: -70s;
-        }
-
-        .cloud--4 {
-            top: 32%;
-            width: clamp(60px, 14vw, 160px);
-            opacity: 0.7;
-            animation-duration: 85s;
-            animation-delay: -20s;
-        }
-
-        .cloud--5 {
-            top: 18%;
-            width: clamp(80px, 18vw, 220px);
-            opacity: 0.85;
-            animation-duration: 110s;
-            animation-delay: -90s;
-        }
-
-        .cloud--6 {
-            top: 40%;
-            width: clamp(100px, 24vw, 280px);
-            opacity: 0.75;
-            animation-duration: 95s;
-            animation-delay: -50s;
-}
-
-        @keyframes cloud-drift {
-            from {
-                transform: translateX(-40vw);
-            }
-            to {
-                transform: translateX(140vw);
-            }
-        }
-
-        /* Respeita quem prefere menos movimento na tela */
-        @media (prefers-reduced-motion: reduce) {
-            .cloud {
-                animation: none;
-                left: 10%;
-            }
-        }
-
-        
         @media (max-width: 600px) {
             #contact {
                 position: static; 
@@ -248,9 +174,6 @@
 </head>
 <body>
 
-
-
-
 <div id="main">
     <div>
         <div class="main-title">「THE MOST AWESOME WEBSITE EVER」</div>
@@ -259,7 +182,6 @@
             <img src="logo.png" class="responsive-logo" alt="u.u">
         </a>
         
-
         <div class="nav-links">
             <a href="https://summersoftget.github.io/art.html">art</a> //
             <a href="https://summersoftget.github.io/gallery.html">gallery</a>//
@@ -284,14 +206,7 @@
 </div>
 
 <div id="background">
-
-    <img src="nuvem1.png" class="cloud cloud--1" alt="">
-    <img src="nuvem2.png" class="cloud cloud--2" alt="">
-    <img src="nuvem1.png" class="cloud cloud--3" alt="">
-    <img src="nuvem2.png" class="cloud cloud--4" alt="">
-    <img src="nuvem2.png" class="cloud cloud--5" alt="">
-    <img src="nuvem1.png" class="cloud cloud--6" alt="">
-    
+    <!-- Nuvens serão geradas dinamicamente via JS -->
 
     <video autoplay muted loop playsinline>
         <source src="squidward.webm" type="video/webm">
@@ -308,17 +223,80 @@
     <video autoplay muted loop playsinline>
         <source src="squidward.webm" type="video/webm">
     </video>
-
 </div>
 
 <script>
+// --- VÍDEOS: Início em tempo aleatório ---
 const videos = document.querySelectorAll("#background video");
-
 videos.forEach(video => {
     video.addEventListener("loadedmetadata", () => {
         video.currentTime = Math.random() * video.duration;
     });
 });
+
+// --- NUVENS ALEATÓRIAS ---
+const bgContainer = document.getElementById("background");
+const cloudImages = ["nuvem1.png", "nuvem2.png"]; // Imagens disponíveis
+const NUM_CLOUDS = 8; // Quer mais nuvens? É só aumentar esse número!
+
+function resetCloud(img, initial = false) {
+    // Escolhe a imagem da nuvem aleatoriamente
+    img.src = cloudImages[Math.floor(Math.random() * cloudImages.length)];
+    
+    // Posição vertical aleatória (entre 2% e 65% da tela para não cobrir o rodapé)
+    const topPos = Math.random() * 63 + 2;
+    img.style.top = topPos + "%";
+
+    // Tamanho aleatório (entre 80px e 240px)
+    const width = Math.floor(Math.random() * 160) + 80;
+    img.style.width = width + "px";
+
+    // Opacidade aleatória (entre 0.5 e 0.95)
+    img.style.opacity = (Math.random() * 0.45 + 0.5).toFixed(2);
+
+    // Duração da animação (entre 50s e 110s)
+    const duration = Math.random() * 60 + 50;
+
+    // Se for a carga inicial da página, espalha as nuvens pela tela
+    // Se for um reinício (a nuvem já saiu da tela), ela começa do canto esquerdo (-width - 50)
+    const startX = initial 
+        ? (Math.random() * (window.innerWidth + width)) - width 
+        : -width - 50;
+
+    const endX = window.innerWidth + 50;
+    const distance = endX - startX;
+
+    // Cancela animação anterior (se houver)
+    if (img.currentAnimation) {
+        img.currentAnimation.cancel();
+    }
+
+    // Executa a animação fluida usando Web Animations API
+    const anim = img.animate(
+        [
+            { transform: `translateX(${startX}px)` },
+            { transform: `translateX(${endX}px)` }
+        ],
+        {
+            duration: duration * 1000,
+            iterations: 1,
+            easing: "linear"
+        }
+    );
+
+    img.currentAnimation = anim;
+
+    // Quando a nuvem termina de atravessar a tela, reseta ela com NOVOS valores aleatórios
+    anim.onfinish = () => resetCloud(img, false);
+}
+
+// Cria e inicializa as nuvens na tela
+for (let i = 0; i < NUM_CLOUDS; i++) {
+    const cloud = document.createElement("img");
+    cloud.classList.add("cloud");
+    bgContainer.appendChild(cloud);
+    resetCloud(cloud, true);
+}
 </script>
 
 </body>
