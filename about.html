@@ -22,7 +22,7 @@
             background-attachment: fixed;
 
             overflow: hidden;
-            color: #0a4286;
+            color: #fdb420;
         }
 
         @media (max-width: 600px) {
@@ -40,7 +40,7 @@
             left: 20px;
             font-family: "Comic Sans MS", "Comic Sans", sans-serif;
             font-size: 17px;
-            color: #0a4286;
+            color: #fdb420;
             text-decoration: none;
             z-index: 20;
             transition: transform 0.2s ease, opacity 0.2s ease;
@@ -72,7 +72,7 @@
             height: 24px;
             margin: -12px 0 0 -12px;
             border-radius: 50%;
-            border: 2px solid rgba(10, 66, 134, 0.4);
+            border: 2px solid rgba(253, 180, 32, 0.4);
             opacity: 0;
             animation: ripple-expand 1.6s ease-out forwards;
         }
@@ -116,7 +116,7 @@
             font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", sans-serif;
             font-size: clamp(15px, 2.2vw, 19px);
             line-height: 1.8;
-            color: #0a4286;
+            color: #fdb420;
             margin: 0;
             word-break: break-word;
         }
@@ -186,16 +186,16 @@
             width: var(--star-size, 20px);
             height: var(--star-size, 20px);
             transform: translate(-50%, -50%);
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 14px rgba(96, 165, 250, 0.8));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 14px rgba(253, 180, 32, 0.9));
         }
 
         .sparkle {
             position: absolute;
             width: var(--sp-size, 3px);
             height: var(--sp-size, 3px);
-            background: #ffffff;
+            background: var(--sp-color, #fdb420);
             border-radius: 50%;
-            box-shadow: 0 0 4px #93c5fd;
+            box-shadow: 0 0 6px var(--sp-color, #fdb420);
             opacity: 0;
             animation: sparkle-fade var(--sp-dur, 0.8s) ease-out forwards;
         }
@@ -317,7 +317,9 @@
     // Parabolic Shooting Stars Engine
     (function () {
         var container = document.getElementById('star-container');
-        var defaultStarSrc = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'><path d='M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z'/></svg>";
+        // Yellow star SVG fallback
+        var defaultStarSrc = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fdb420'><path d='M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z'/></svg>";
+        var sparkleColors = ['#fdb420', '#ffe28a', '#ff9e1b', '#ffffff', '#ffd066'];
 
         function spawnParabolicStar() {
             var el = document.createElement('div');
@@ -387,11 +389,13 @@
             var dy = (Math.random() - 0.5) * 16;
             var spDur = 0.4 + Math.random() * 0.5;
             var spSize = 2 + Math.random() * 3;
+            var color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
 
             sp.style.setProperty('--dx', dx + 'px');
             sp.style.setProperty('--dy', dy + 'px');
             sp.style.setProperty('--sp-dur', spDur + 's');
             sp.style.setProperty('--sp-size', spSize + 'px');
+            sp.style.setProperty('--sp-color', color);
 
             container.appendChild(sp);
 
