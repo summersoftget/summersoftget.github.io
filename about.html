@@ -7,29 +7,22 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
 
-        @font-face {
-            font-family: "Suisse International";
-            src: url("SuisseIntl-Regular.woff2") format("woff2"),
-                 url("SuisseIntl-Regular.woff") format("woff");
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: "Times New Roman", serif;
+            font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", sans-serif;
 
-            background-image: url("sitefundo.png");
+            background-image: url("background2.png");
+            background-color: #020617;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
 
             overflow: hidden;
+            color: #0a4286;
         }
 
         @media (max-width: 600px) {
@@ -45,17 +38,18 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            font-family: "Times New Roman", serif;
+            font-family: "Comic Sans MS", "Comic Sans", sans-serif;
             font-size: 17px;
-            color: #000;
+            color: #0a4286;
             text-decoration: none;
             z-index: 20;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .back-btn:hover {
             text-decoration: underline;
             transform: translateX(-3px);
+            opacity: 0.8;
         }
 
         /* ---- Anéis de ripple ---- */
@@ -78,7 +72,7 @@
             height: 24px;
             margin: -12px 0 0 -12px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.85);
+            border: 2px solid rgba(10, 66, 134, 0.4);
             opacity: 0;
             animation: ripple-expand 1.6s ease-out forwards;
         }
@@ -92,7 +86,7 @@
             100% { transform: scale(48); opacity: 0; }
         }
 
-        /* ---- Container principal (Layout Alinhado) ---- */
+        /* ---- Container principal ---- */
         #page-reveal {
             position: relative;
             z-index: 2;
@@ -115,25 +109,25 @@
             padding: 24px 32px;
             box-sizing: border-box;
             text-align: center;
-            margin-top: -60px; /* Eleva levemente para centralizar em relação à tela */
+            margin-top: -60px;
         }
 
         .about-text {
-            font-family: "Suisse International", "Helvetica Neue", Arial, sans-serif;
+            font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Comic Neue", sans-serif;
             font-size: clamp(15px, 2.2vw, 19px);
             line-height: 1.8;
-            color: #111;
+            color: #0a4286;
             margin: 0;
             word-break: break-word;
         }
 
-        /* ---- Ondas Psicodélicas Rebaixadas ---- */
+        /* ---- Ondas Noturnas ---- */
         #waves {
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 160px; /* Reduzido de 240px para 160px */
+            height: 160px;
             z-index: 0;
             overflow: hidden;
             pointer-events: none;
@@ -141,7 +135,7 @@
 
         @media (max-width: 600px) {
             #waves {
-                height: 100px; /* Ajuste responsivo em telas menores */
+                height: 100px;
             }
         }
 
@@ -156,25 +150,10 @@
             mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 100%);
         }
 
-        .wave-1 {
-            opacity: 0.75;
-            animation: wave-scroll 12s linear infinite, hue-cycle 8s linear infinite;
-        }
-
-        .wave-2 {
-            opacity: 0.7;
-            animation: wave-scroll-rev 9s linear infinite, hue-cycle 6s linear infinite reverse;
-        }
-
-        .wave-3 {
-            opacity: 0.65;
-            animation: wave-scroll 15s linear infinite, hue-cycle 10s linear infinite;
-        }
-
-        .wave-4 {
-            opacity: 0.6;
-            animation: wave-scroll-rev 20s linear infinite, hue-cycle 12s linear infinite reverse;
-        }
+        .wave-1 { opacity: 0.85; animation: wave-scroll 16s linear infinite; }
+        .wave-2 { opacity: 0.75; animation: wave-scroll-rev 12s linear infinite; }
+        .wave-3 { opacity: 0.65; animation: wave-scroll 20s linear infinite; }
+        .wave-4 { opacity: 0.55; animation: wave-scroll-rev 25s linear infinite; }
 
         @keyframes wave-scroll {
             from { transform: translateX(0); }
@@ -186,45 +165,50 @@
             to   { transform: translateX(0); }
         }
 
-        @keyframes hue-cycle {
-            0%   { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        /* ---- Bolinhas Flutuantes (Tela Inteira) ---- */
-        #bubbles {
+        /* ---- Estrelas Cadentes Parabólicas ---- */
+        #star-container {
             position: fixed;
             inset: 0;
+            pointer-events: none;
             z-index: 1;
             overflow: hidden;
-            pointer-events: none;
-            mix-blend-mode: difference;
         }
 
-        .bubble {
+        .star-entity {
             position: absolute;
+            top: 0;
+            left: 0;
+            will-change: transform, opacity;
+        }
+
+        .star-img {
+            position: absolute;
+            width: var(--star-size, 20px);
+            height: var(--star-size, 20px);
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 14px rgba(96, 165, 250, 0.8));
+        }
+
+        .sparkle {
+            position: absolute;
+            width: var(--sp-size, 3px);
+            height: var(--sp-size, 3px);
+            background: #ffffff;
             border-radius: 50%;
-            top: var(--y, 50%);
-            left: -5vw;
-            width: var(--size, 14px);
-            height: var(--size, 14px);
-            background: var(--bubble-color, #FF3CAC);
-            box-shadow: 0 0 calc(var(--size, 14px) * 0.8) var(--bubble-color, #FF3CAC);
-            animation: bubble-float var(--dur, 12s) ease-in-out infinite,
-                       bubble-hue var(--hdur, 4s) linear infinite;
-            animation-delay: var(--delay, 0s), 0s;
+            box-shadow: 0 0 4px #93c5fd;
+            opacity: 0;
+            animation: sparkle-fade var(--sp-dur, 0.8s) ease-out forwards;
         }
 
-        @keyframes bubble-float {
-            0%   { transform: translate(0, 0) scale(0); opacity: 0; }
-            10%  { transform: translate(12vw, -10px) scale(1); opacity: var(--o, 0.85); }
-            90%  { transform: translate(108vw, 10px) scale(1); opacity: var(--o, 0.85); }
-            100% { transform: translate(120vw, 0) scale(0); opacity: 0; }
-        }
-
-        @keyframes bubble-hue {
-            0%   { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+        @keyframes sparkle-fade {
+            0% {
+                opacity: 0.9;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0.2);
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -235,7 +219,7 @@
             .ripple-ring {
                 display: none;
             }
-            #waves, #bubbles {
+            #waves, #star-container {
                 display: none;
             }
         }
@@ -252,19 +236,17 @@
     <span class="ripple-ring ripple-ring--3"></span>
 </div>
 
+<div id="star-container"></div>
+
 <div id="waves">
     <svg class="wave-1" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"    stop-color="#FF3CAC"/>
-                <stop offset="12.5%" stop-color="#FF9800"/>
-                <stop offset="25%"   stop-color="#00E5A0"/>
-                <stop offset="37.5%" stop-color="#2196F3"/>
-                <stop offset="50%"   stop-color="#FF3CAC"/>
-                <stop offset="62.5%" stop-color="#FF9800"/>
-                <stop offset="75%"   stop-color="#00E5A0"/>
-                <stop offset="87.5%" stop-color="#2196F3"/>
-                <stop offset="100%"  stop-color="#FF3CAC"/>
+                <stop offset="0%"    stop-color="#020617"/>
+                <stop offset="25%"   stop-color="#0b1e36"/>
+                <stop offset="50%"   stop-color="#0f2b48"/>
+                <stop offset="75%"   stop-color="#0b1e36"/>
+                <stop offset="100%"  stop-color="#020617"/>
             </linearGradient>
         </defs>
         <path d="M0,80 C180,20 360,140 720,80 C1080,20 1260,140 1440,80
@@ -275,15 +257,11 @@
     <svg class="wave-2" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"    stop-color="#7B2FF7"/>
-                <stop offset="12.5%" stop-color="#F72585"/>
-                <stop offset="25%"   stop-color="#FFD60A"/>
-                <stop offset="37.5%" stop-color="#00F5D4"/>
-                <stop offset="50%"   stop-color="#7B2FF7"/>
-                <stop offset="62.5%" stop-color="#F72585"/>
-                <stop offset="75%"   stop-color="#FFD60A"/>
-                <stop offset="87.5%" stop-color="#00F5D4"/>
-                <stop offset="100%"  stop-color="#7B2FF7"/>
+                <stop offset="0%"    stop-color="#091e42"/>
+                <stop offset="25%"   stop-color="#1e3a8a"/>
+                <stop offset="50%"   stop-color="#0c2340"/>
+                <stop offset="75%"   stop-color="#1d4ed8"/>
+                <stop offset="100%"  stop-color="#091e42"/>
             </linearGradient>   
         </defs>
         <path d="M0,110 C240,60 480,150 720,110 C960,60 1200,150 1440,110
@@ -294,15 +272,11 @@
     <svg class="wave-3" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"    stop-color="#00C2FF"/>
-                <stop offset="12.5%" stop-color="#39FF88"/>
-                <stop offset="25%"   stop-color="#FF1744"/>
-                <stop offset="37.5%" stop-color="#FFEA00"/>
-                <stop offset="50%"   stop-color="#00C2FF"/>
-                <stop offset="62.5%" stop-color="#39FF88"/>
-                <stop offset="75%"   stop-color="#FF1744"/>
-                <stop offset="87.5%" stop-color="#FFEA00"/>
-                <stop offset="100%"  stop-color="#00C2FF"/>
+                <stop offset="0%"    stop-color="#0f172a"/>
+                <stop offset="25%"   stop-color="#1e293b"/>
+                <stop offset="50%"   stop-color="#030712"/>
+                <stop offset="75%"   stop-color="#172554"/>
+                <stop offset="100%"  stop-color="#0f172a"/>
             </linearGradient>
         </defs>
         <path d="M0,140 C160,90 500,180 720,140 C940,90 1280,180 1440,140
@@ -313,13 +287,10 @@
     <svg class="wave-4" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%"    stop-color="#FF6EC7"/>
-                <stop offset="16.5%" stop-color="#845EC2"/>
-                <stop offset="33%"   stop-color="#00D2FC"/>
-                <stop offset="50%"   stop-color="#FF6EC7"/>
-                <stop offset="66.5%" stop-color="#845EC2"/>
-                <stop offset="83%"   stop-color="#00D2FC"/>
-                <stop offset="100%"  stop-color="#FF6EC7"/>
+                <stop offset="0%"    stop-color="#03071e"/>
+                <stop offset="33%"   stop-color="#0a192f"/>
+                <stop offset="66%"   stop-color="#112240"/>
+                <stop offset="100%"  stop-color="#03071e"/>
             </linearGradient>
         </defs>
         <path d="M0,170 C220,130 460,205 720,170 C980,130 1220,205 1440,170
@@ -327,8 +298,6 @@
                  L2880,240 L0,240 Z" fill="url(#grad4)"/>
     </svg>
 </div>
-
-<div id="bubbles"></div>
 
 <div id="page-reveal">
     <div id="about-content">
@@ -345,33 +314,113 @@
 </div>
 
 <script>
+    // Parabolic Shooting Stars Engine
     (function () {
-        var container = document.getElementById('bubbles');
-        var colors = ['#FF3CAC', '#00E5A0', '#FFD60A', '#7B2FF7', '#00C2FF', '#FF6EC7', '#39FF88', '#F72585'];
-        var total = window.innerWidth < 600 ? 18 : 35;
+        var container = document.getElementById('star-container');
+        var defaultStarSrc = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'><path d='M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z'/></svg>";
 
-        for (var i = 0; i < total; i++) {
-            var b = document.createElement('span');
-            b.className = 'bubble';
+        function spawnParabolicStar() {
+            var el = document.createElement('div');
+            el.className = 'star-entity';
 
-            var size = 6 + Math.random() * 20;
-            var yPos = 5 + Math.random() * 85;
-            var dur = 8 + Math.random() * 14;
-            var delay = -Math.random() * dur;
-            var hdur = 3 + Math.random() * 5;
-            var opacity = 0.6 + Math.random() * 0.35;
-            var color = colors[Math.floor(Math.random() * colors.length)];
+            var img = document.createElement('img');
+            img.className = 'star-img';
+            img.src = 'star.png';
+            img.onerror = function() { this.src = defaultStarSrc; };
 
-            b.style.setProperty('--size', size.toFixed(1) + 'px');
-            b.style.setProperty('--y', yPos.toFixed(1) + '%');
-            b.style.setProperty('--dur', dur.toFixed(2) + 's');
-            b.style.setProperty('--delay', delay.toFixed(2) + 's');
-            b.style.setProperty('--hdur', hdur.toFixed(2) + 's');
-            b.style.setProperty('--o', opacity.toFixed(2));
-            b.style.setProperty('--bubble-color', color);
+            var starSize = 12 + Math.random() * 10;
+            img.style.setProperty('--star-size', starSize + 'px');
+            el.appendChild(img);
+            container.appendChild(el);
 
-            container.appendChild(b);
+            // Parabola trajectory parameters
+            var direction = Math.random() < 0.5 ? 1 : -1;
+            var xStart = direction === 1 ? -50 : window.innerWidth + 50;
+            var xEnd = direction === 1 ? window.innerWidth + 50 : -50;
+            
+            var h = window.innerWidth * (0.3 + Math.random() * 0.4);
+            var k = window.innerHeight * (0.1 + Math.random() * 0.3);
+            var a = (0.0003 + Math.random() * 0.0006) * (Math.random() < 0.7 ? 1 : -1);
+
+            var startTime = null;
+            var duration = 2000 + Math.random() * 1200;
+
+            function animate(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = (timestamp - startTime) / duration;
+
+                if (progress >= 1) {
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                    return;
+                }
+
+                var currentX = xStart + (xEnd - xStart) * progress;
+                var currentY = a * Math.pow(currentX - h, 2) + k;
+
+                var derivative = 2 * a * (currentX - h) * direction;
+                var angleRad = Math.atan(derivative);
+
+                var opacity = 1;
+                if (progress < 0.1) opacity = progress / 0.1;
+                if (progress > 0.85) opacity = (1 - progress) / 0.15;
+
+                el.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px) rotate(' + angleRad + 'rad)';
+                el.style.opacity = opacity;
+
+                if (Math.random() < 0.45) {
+                    createSparkle(currentX, currentY);
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
         }
+
+        function createSparkle(x, y) {
+            var sp = document.createElement('div');
+            sp.className = 'sparkle';
+            sp.style.left = x + 'px';
+            sp.style.top = y + 'px';
+
+            var dx = (Math.random() - 0.5) * 16;
+            var dy = (Math.random() - 0.5) * 16;
+            var spDur = 0.4 + Math.random() * 0.5;
+            var spSize = 2 + Math.random() * 3;
+
+            sp.style.setProperty('--dx', dx + 'px');
+            sp.style.setProperty('--dy', dy + 'px');
+            sp.style.setProperty('--sp-dur', spDur + 's');
+            sp.style.setProperty('--sp-size', spSize + 'px');
+
+            container.appendChild(sp);
+
+            setTimeout(function() {
+                if (sp.parentNode) sp.parentNode.removeChild(sp);
+            }, spDur * 1000);
+        }
+
+        function scheduleNextPassing() {
+            var nextDelay = 3500 + Math.random() * 4500;
+
+            setTimeout(function () {
+                var rand = Math.random();
+                var count = 1;
+                if (rand > 0.75) count = 2;
+                if (rand > 0.92) count = 3;
+
+                for (var i = 0; i < count; i++) {
+                    (function(offset) {
+                        setTimeout(spawnParabolicStar, offset * (250 + Math.random() * 300));
+                    })(i);
+                }
+
+                scheduleNextPassing();
+            }, nextDelay);
+        }
+
+        setTimeout(spawnParabolicStar, 1000);
+        scheduleNextPassing();
     })();
 </script>
 
