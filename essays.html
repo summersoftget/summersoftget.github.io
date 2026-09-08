@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GETULIO - essays</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+    :root{
+        --ink:#000000;
+        --paper:#ffffff;
+        --red:#e8331f;
+        --hair:1px;
+        --frame:3px;
+        --sans:"Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+        --serif:Georgia, "Times New Roman", serif;
+    }
+
+    html, body{
+        margin:0;
+        padding:0;
+        width:100%;
+        font-family:var(--serif);
+        color:var(--ink);
+    }
+
+    /* Fixed background fix to prevent scroll lag */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #ffffff;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+        will-change: transform;
+    }
+
+    /* nav, same pattern as the rest of the site */
+    .nav-topo{
+        text-align:center;
+        padding:20px 0;
+        position:relative;
+        z-index:2;
+    }
+    .nav-topo a{
+        color:#000;
+        text-decoration:none;
+        font-size:18px;
+        font-family:var(--serif);
+        background:rgba(255,255,255,0.8);
+        padding:5px 15px;
+        border-radius:20px;
+    }
+    .nav-topo a:hover{ text-decoration:underline; }
+
+    /* outer thin rectangle */
+    .essays-outer{
+        width:90%;
+        max-width:760px;
+        margin:30px auto 60px auto;
+        padding:22px;
+        box-sizing:border-box;
+        border:var(--hair) solid var(--ink);
+        background:rgba(255,255,255,0.55);
+        position:relative;
+        z-index:2;
+    }
+
+    /* corner registration marks */
+    .corner{
+        position:absolute;
+        width:16px;
+        height:16px;
+        pointer-events:none;
+    }
+    .corner span{
+        position:absolute;
+        background:var(--ink);
+    }
+    .corner-tl{ top:-1px; left:-1px; }
+    .corner-tl span:nth-child(1){ top:0; left:0; width:1px; height:16px; }
+    .corner-tl span:nth-child(2){ top:0; left:5px; width:1px; height:11px; }
+    .corner-tl span:nth-child(3){ top:0; left:10px; width:1px; height:6px; }
+
+    .corner-br{ bottom:-1px; right:-1px; }
+    .corner-br span:nth-child(1){ bottom:0; right:0; width:1px; height:16px; }
+    .corner-br span:nth-child(2){ bottom:0; right:5px; width:1px; height:11px; }
+    .corner-br span:nth-child(3){ bottom:0; right:10px; width:1px; height:6px; }
+
+    /* inner rectangle, few-pixel border, holds the content */
+    .essays-frame{
+        border:var(--frame) solid var(--ink);
+        background:var(--paper);
+        padding:0;
+    }
+
+    .essays-head{
+        display:flex;
+        align-items:baseline;
+        justify-content:space-between;
+        padding:22px 26px 18px 26px;
+        border-bottom:var(--hair) solid var(--ink);
+    }
+
+    /* Header title area with slightly larger red balls */
+    .essays-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .essays-head h1{
+        font-family:var(--sans);
+        font-weight:600;
+        font-size:26px;
+        letter-spacing:0.2px;
+        margin:0;
+    }
+
+    .red-dots {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+
+    .red-dot {
+        width: 11px;
+        height: 11px;
+        background-color: var(--red);
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .essays-head .count{
+        font-family:var(--sans);
+        font-weight:400;
+        font-size:13px;
+        color:#000;
+        opacity:0.55;
+    }
+
+    .essay-list{
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+
+    .essay-item + .essay-item{
+        border-top:var(--hair) solid var(--ink);
+    }
+
+    .essay-toggle{
+        width:100%;
+        display:flex;
+        align-items:flex-start;
+        gap:16px;
+        background:none;
+        border:none;
+        text-align:left;
+        cursor:pointer;
+        padding:18px 26px;
+        font-family:inherit;
+        color:inherit;
+    }
+
+    .essay-index{
+        font-family:var(--sans);
+        font-size:13px;
+        line-height:1.4;
+        padding-top:2px;
+        min-width:20px;
+        position:relative;
+    }
+    .essay-index .dot{
+        display:none;
+        position:absolute;
+        left:-11px;
+        top:8px;
+        width:5px;
+        height:5px;
+        border-radius:50%;
+        background:var(--red);
+    }
+    .essay-item.open .essay-index .dot{ display:block; }
+
+    .essay-meta{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+        gap:4px;
+    }
+    .essay-title{
+        font-family:var(--sans);
+        font-size:16px;
+        font-weight:500;
+    }
+    .essay-date{
+        font-family:var(--sans);
+        font-size:12px;
+        opacity:0.5;
+    }
+
+    .essay-mark{
+        font-family:var(--sans);
+        font-size:14px;
+        padding-top:2px;
+        opacity:0.6;
+        min-width:14px;
+        text-align:right;
+    }
+
+    /* CSS Grid Accordion Transition */
+    .essay-body{
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s ease, padding 0.35s ease;
+        padding: 0 26px;
+    }
+
+    .essay-item.open .essay-body{
+        grid-template-rows: 1fr;
+        padding: 0 26px 24px 26px;
+    }
+
+    .essay-body-inner{
+        overflow: hidden; /* Required for CSS grid animation */
+    }
+
+    .essay-content{
+        border-top:var(--hair) solid var(--ink);
+        padding-top:18px;
+        padding-left:36px;
+        font-family:var(--serif);
+        font-size:16px;
+        line-height:1.7;
+        text-align:justify;
+        max-width:640px;
+    }
+    .essay-content p{ margin:0 0 14px 0; }
+    .essay-content p:last-child{ margin-bottom:0; }
+
+    @media (max-width:600px){
+        .essays-outer{ width:94%; padding:14px; }
+        .essays-head{ padding:18px 18px 14px 18px; }
+        .essay-toggle{ padding:16px 18px; }
+        .essay-body{ padding:0 18px; }
+        .essay-item.open .essay-body{ padding:0 18px 20px 18px; }
+        .essay-content{ padding-left:0; }
+    }
+
+</style>
+</head>
+<body>
+
+    <div class="nav-topo">
+        <a href="https://summersoftget.github.io/index.html">home</a> //
+        <a href="https://summersoftget.github.io/art.html">art</a> //
+        <a href="https://summersoftget.github.io/gallery.html">gallery</a> //
+        <a href="https://summersoftget.github.io/projects.html">projects</a> //
+        <a href="https://summersoftget.github.io/texts.html">texts</a>
+    </div>
+
+    <div class="essays-outer">
+        <div class="corner corner-tl"><span></span><span></span><span></span></div>
+        <div class="corner corner-br"><span></span><span></span><span></span></div>
+
+        <div class="essays-frame">
+            <div class="essays-head">
+                <div class="essays-title-wrap">
+                    <h1>essays</h1>
+                    <div class="red-dots">
+                        <span class="red-dot"></span>
+                        <span class="red-dot"></span>
+                        <span class="red-dot"></span>
+                    </div>
+                </div>
+                <span class="count">3 textos</span>
+            </div>
+
+            <ol class="essay-list">
+
+                <li class="essay-item">
+                    <button class="essay-toggle" onclick="toggleEssay(this)">
+                        <span class="essay-index"><span class="dot"></span>01</span>
+                        <span class="essay-meta">
+                            <span class="essay-title">Sobre repetir sem repetir</span>
+                            <span class="essay-date">03 de setembro de 2026</span>
+                        </span>
+                        <span class="essay-mark">+</span>
+                    </button>
+                    <div class="essay-body">
+                        <div class="essay-body-inner">
+                            <div class="essay-content">
+                                <p>Escreva aqui o primeiro parágrafo do ensaio. Diferente das postagens do blog, a ideia dessa página é abrigar textos mais longos e mais trabalhados, então vale a pena escrever com mais cuidado na estrutura de cada parágrafo.</p>
+                                <p>Segundo parágrafo de exemplo. Pode ter quantos parágrafos forem necessários; o contêiner cresce em altura sem quebrar o layout.</p>
+                                <p>Parágrafo final, para fechar a ideia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="essay-item">
+                    <button class="essay-toggle" onclick="toggleEssay(this)">
+                        <span class="essay-index"><span class="dot"></span>02</span>
+                        <span class="essay-meta">
+                            <span class="essay-title">Título do segundo ensaio</span>
+                            <span class="essay-date">28 de agosto de 2026</span>
+                        </span>
+                        <span class="essay-mark">+</span>
+                    </button>
+                    <div class="essay-body">
+                        <div class="essay-body-inner">
+                            <div class="essay-content">
+                                <p>Texto de exemplo para o segundo ensaio. Substitua por conteúdo real quando tiver.</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="essay-item">
+                    <button class="essay-toggle" onclick="toggleEssay(this)">
+                        <span class="essay-index"><span class="dot"></span>03</span>
+                        <span class="essay-meta">
+                            <span class="essay-title">Título do terceiro ensaio</span>
+                            <span class="essay-date">14 de agosto de 2026</span>
+                        </span>
+                        <span class="essay-mark">+</span>
+                    </button>
+                    <div class="essay-body">
+                        <div class="essay-body-inner">
+                            <div class="essay-content">
+                                <p>Texto de exemplo para o terceiro ensaio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function toggleEssay(botao){
+            const item = botao.closest('.essay-item');
+            const mark = botao.querySelector('.essay-mark');
+            const isOpen = item.classList.contains('open');
+
+            item.classList.toggle('open');
+            mark.textContent = isOpen ? '+' : '–';
+        }
+    </script>
+
+</body>
+</html>
