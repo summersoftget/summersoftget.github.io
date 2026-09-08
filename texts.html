@@ -6,12 +6,31 @@
     <title>GETULIO - texts</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
+        /* Define a fonte customizada SangBleu Republic */
+        @font-face {
+            font-family: 'SangBleu Republic';
+            src: url('SangBleuRepublic-Regular.woff2') format('woff2'),
+                 url('SangBleuRepublic-Regular.woff') format('woff'),
+                 url('SangBleuRepublic-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SangBleu Republic';
+            src: url('SangBleuRepublic-Italic.woff2') format('woff2'),
+                 url('SangBleuRepublic-Italic.woff') format('woff'),
+                 url('SangBleuRepublic-Italic.otf') format('opentype');
+            font-weight: normal;
+            font-style: italic;
+        }
+
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            /* Removido o height: 100% e overflow: hidden para permitir rolagem */
-            font-family: "Times New Roman", serif;
+            /* Substituído "Times New Roman" por SangBleu Republic */
+            font-family: 'SangBleu Republic', serif;
 
             background-image: url("sitefundo.png");
             background-size: cover;          
@@ -46,10 +65,10 @@
             width: 90%;
             max-width: 800px;
             margin: 30px auto 30px auto; /* Centraliza e dá espaço embaixo */
-            background-color: rgba(255, 255, 255, 0.95); /* Branco levemente transparente, ajuste se quiser 100% sólido */
+            background-color: rgba(255, 255, 255, 0.95); /* Branco levemente transparente */
             padding: 40px;
             box-sizing: border-box;
-            border: 2px solid #000; /* Borda opcional, remova se não gostar */
+            border: 2px solid #000;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
             position: relative;
             z-index: 2;
@@ -106,7 +125,7 @@
             background: transparent;
             border: 1px solid #000;
             padding: 8px 16px;
-            font-family: "Times New Roman", serif;
+            font-family: 'SangBleu Republic', serif;
             font-size: 16px;
             cursor: pointer;
             margin-top: 10px;
@@ -152,34 +171,6 @@
             <img src="pinguim.png" alt="Pinguim deitado" class="pinguim-img">
         </div>
 
-        <!--
-        <div class="post">
-            <h2 class="post-title">Um pensamento rápido</h2>
-            <div class="post-date">21 de Agosto de 2026</div>
-            <div class="texto-visivel">
-                <p>Este é um exemplo de texto curto. Ele não precisa do botão de "ler mais" porque cabe perfeitamente na tela sem poluir muito visualmente. É ótimo para pequenas reflexões.</p>
-            </div>
-        </div>
-
-        <div class="post">
-            <h2 class="post-title">A história completa</h2>
-            <div class="post-date">15 de Agosto de 2026</div>
-            
-            <div class="texto-visivel">
-                <p>Aqui começa o seu texto longo. Você deixa um ou dois parágrafos visíveis para o leitor saber do que se trata e ficar curioso para continuar lendo a postagem.</p>
-            </div>
-
-            <div class="texto-completo">
-                <p>Aqui vem o resto do texto! Pode colocar vários parágrafos.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p>Você pode inclusive colocar imagens ou outras coisas aqui dentro.</p>
-            </div>
-
-            <button class="btn-ler-mais" onclick="alternarTexto(this)">Ler mais</button>
-        </div>
-
-        -->
-
         <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
         <div class="post">
@@ -192,7 +183,7 @@
 
             <div class="texto-completo">
                 <p>Sim. Getulio. Sim. Acontece que, com uma cabeça tão grande, uma hora ou outra algum pensamento chega (mesmo que com muito esforço), então é isso que eu venho fazendo ultimamente, produzindo pensamentos.
-                A maioria deles vem com alguma espécie de defeito de qualquer natureza, mas os que sobrevivem ao ambiente hostil chegam a ver a luz do dia e percebem quão legal é estar nesse mundo, ver alguns Instagram Reels™ ou beber mango loco, aí eles me agradecem por saírem da minha cabeça.
+                A maioria deles vem com alguma espécie de defeito de qualquer natureza, mas os que sobrevivem ao ambiente hostil chegam a ver a luz do day e percebem quão legal é estar nesse mundo, ver alguns Instagram Reels™ ou beber mango loco, aí eles me agradecem por saírem da minha cabeça.
                 </p>
                 <p>Bem, de qualquer maneira, acho que isso tudo acaba sendo um modo de não deixar tudo morrer empoeirado na prateleira da minha cabeça e, já que algumas coisas estão escritas, não custa nada publicar.</p>
                 <p> </p>
@@ -208,37 +199,36 @@
             <div class="post-date">21 de Agosto de 2026</div>
             
             <div class="texto-visivel">
-    <p>Para vocês que já falaram comigo sobre música, vocês sabem que eu agarro firmemente várias opiniões sobre o estado atual da música pop. Geralmente eu não odeio nada porque é popular, na realidade, eu acho que isso costuma a ser um bom indicador de qualidade. Como em qualquer parte da indústria do entretenimento, entretanto, algumas épocas são melhores que outras.</p>
-</div>
+                <p>Para vocês que já falaram comigo sobre música, vocês sabem que eu agarro firmemente várias opiniões sobre o estado atual da música pop. Geralmente eu não odeio nada porque é popular, na realidade, eu acho que isso costuma a ser um bom indicador de qualidade. Como em qualquer parte da indústria do entretenimento, entretanto, algumas épocas são melhores que outras.</p>
+            </div>
 
-<div class="texto-completo">
-    <p>Vejam: eu amo o Miles Davis, não me entendam mal, mas por mais que eu ame ouvir Bitches Brew, eu não consigo me sentir tão conectado quanto como quando escuto algo mais recente (80's+). Sob essas circunstâncias então, aqui as músicas mais novas que eu mais estou viciado no momento:</p>
-    
-    <p><a href="https://youtu.be/ws5K_5G_xvI?si=RPLun1e7gdJfxMLH" target="_blank">Dijon - The Dress</a> - essa aqui não dá, manos. A ideia é ótima, vibe imaculada. Os acordes tem umas voicing lindas. Não dá pra não dançar. Sabe quando você tem uma coceirinha que não sabe onde é e se perde na procura? Essa música coça o cérebro certinho aonde deveria coçar. (PS: <a href="https://www.youtube.com/watch?v=q3gRvWIofSo&list=RDws5K_5G_xvI&index=2" target="_blank">God in Wilson</a> é incrívelmente linda também)</p>
-    
-    <p><a href="https://youtu.be/-L7eMf6Yf84?si=XXsynahQEc8An-Be" target="_blank">NewJeans - Hurt</a> - já ouvi umas 200 vezes desde que saiu. Não sei se vai pegar tanto pra vocês, talvez eu goste do vídeo clipe live special um pouco além da conta por causa das cores, mas o baixo cantado é super divertido. </p>
-    
-    <p><a href="https://youtu.be/NF47oaT6qzc?si=UMaRDJYrV70sQYrB" target="_blank">The 1975 - Me & You Together Song</a> - isso aqui soa exatamente como 2012. Eu conheci pelo Mateus Asato.</p>
-    
-    <p><a href="https://youtu.be/mXiFHDfvn4A?si=3mxwuXRKVPn6b4w2" target="_blank">Frank Ocean - Moon River</a> - me lembra muito Blue Moon - Take 9/M do Elvis. Bom para ouvir de noite.</p>
-    
-    <p><a href="https://youtu.be/7flrKMGfwjw?si=K9Fmv5vlbyp_GzZC" target="_blank">New Edition - Can You Stand the Rain</a> - nós amamos um R&B lindo dos anos 90 nesse site.</p>
-    
-    <p><a href="https://youtu.be/u3IAybZOt-E?si=O89WC6uqA_a0Y4NB" target="_blank">Paramore - When it Rains</a> - Hailey Williams eu posso te fazer feliz, por favor.</p>
-    
-    <p><a href="https://www.youtube.com/watch?v=3bLYswnD8yk&list=RD3bLYswnD8yk&start_radio=1" target="_blank">Mk.gee - Dream Police</a> - eu comecei a tremer a primeira vez que eu ouvi, quase desmaiei</p>
-    
-    <p><a href="https://youtu.be/TtmO4Y_zrXw?si=NDMJgz1MYSD4OJrY" target="_blank">D'Angelo - I Found my Smile Again</a> - divertidíssima, não dá para errar com o diawngelow.. Prince vivia nesse mano.</p>
-    
-    <p><a href="https://www.youtube.com/watch?v=DYHng61lftA&list=RDDYHng61lftA&start_radio=1" target="_blank">John Mayer - Covered in Rain</a> - ele não está coberto em água, mas sim em chuva... chequem o solo, lifechanging. A música era melhor quando manos se gravavam implorando na chuva por amor</p>
+            <div class="texto-completo">
+                <p>Vejam: eu amo o Miles Davis, não me entendam mal, mas por mais que eu ame ouvir Bitches Brew, eu não consigo me sentir tão conectado quanto como quando escuto algo mais recente (80's+). Sob essas circunstâncias então, aqui as músicas mais novas que eu mais estou viciado no momento:</p>
+                
+                <p><a href="https://youtu.be/ws5K_5G_xvI?si=RPLun1e7gdJfxMLH" target="_blank">Dijon - The Dress</a> - essa aqui não dá, manos. A ideia é ótima, vibe imaculada. Os acordes tem umas voicing lindas. Não dá pra não dançar. Sabe quando você tem uma coceirinha que não sabe onde é e se perde na procura? Essa música coça o cérebro certinho aonde deveria coçar. (PS: <a href="https://www.youtube.com/watch?v=q3gRvWIofSo&list=RDws5K_5G_xvI&index=2" target="_blank">God in Wilson</a> é incrívelmente linda também)</p>
+                
+                <p><a href="https://youtu.be/-L7eMf6Yf84?si=XXsynahQEc8An-Be" target="_blank">NewJeans - Hurt</a> - já ouvi umas 200 vezes desde que saiu. Não sei se vai pegar tanto pra vocês, talvez eu goste do vídeo clipe live special um pouco além da conta por causa das cores, mas o baixo cantado é super divertido. </p>
+                
+                <p><a href="https://youtu.be/NF47oaT6qzc?si=UMaRDJYrV70sQYrB" target="_blank">The 1975 - Me & You Together Song</a> - isso aqui soa exatamente como 2012. Eu conheci pelo Mateus Asato.</p>
+                
+                <p><a href="https://youtu.be/mXiFHDfvn4A?si=3mxwuXRKVPn6b4w2" target="_blank">Frank Ocean - Moon River</a> - me lembra muito Blue Moon - Take 9/M do Elvis. Bom para ouvir de noite.</p>
+                
+                <p><a href="https://youtu.be/7flrKMGfwjw?si=K9Fmv5vlbyp_GzZC" target="_blank">New Edition - Can You Stand the Rain</a> - nós amamos um R&B lindo dos anos 90 nesse site.</p>
+                
+                <p><a href="https://youtu.be/u3IAybZOt-E?si=O89WC6uqA_a0Y4NB" target="_blank">Paramore - When it Rains</a> - Hailey Williams eu posso te fazer feliz, por favor.</p>
+                
+                <p><a href="https://www.youtube.com/watch?v=3bLYswnD8yk&list=RD3bLYswnD8yk&start_radio=1" target="_blank">Mk.gee - Dream Police</a> - eu comecei a tremer a primeira vez que eu ouvi, quase desmaiei</p>
+                
+                <p><a href="https://youtu.be/TtmO4Y_zrXw?si=NDMJgz1MYSD4OJrY" target="_blank">D'Angelo - I Found my Smile Again</a> - divertidíssima, não dá para errar com o diawngelow.. Prince vivia nesse mano.</p>
+                
+                <p><a href="https://www.youtube.com/watch?v=DYHng61lftA&list=RDDYHng61lftA&start_radio=1" target="_blank">John Mayer - Covered in Rain</a> - ele não está coberto em água, mas sim em chuva... chequem o solo, lifechanging. A música era melhor quando manos se gravavam implorando na chuva por amor</p>
 
-    <p></p>
-    <p>PS: Me empolguei e ao final da lista acabei esquecendo que ia colocar músicas mais novas, mas vai ficar assim mesmo. Outra hora eu faço outra (talvez).</p>
-</div>
+                <p></p>
+                <p>PS: Me empolguei e ao final da lista acabei esquecendo que ia colocar músicas mais novas, mas vai ficar assim mesmo. Outra hora eu faço outra (talvez).</p>
+            </div>
 
             <button class="btn-ler-mais" onclick="alternarTexto(this)">Ler mais</button>
         </div>
-
 
         <div class="post">
             <h2 class="post-title">MEUS FILMES FAVORITOS NO MOMENTO</h2>
@@ -264,8 +254,6 @@
             </div>
         </div>
 
-        
-
         <div class="post">
             <h2 class="post-title">A história completa</h2>
             <div class="post-date">15 de Agosto de 2026</div>
@@ -287,7 +275,6 @@
 
     <script>
         function alternarTexto(botao) {
-            // Acha a div com a classe 'texto-completo' que está logo acima do botão
             const post = botao.parentElement;
             const textoCompleto = post.querySelector('.texto-completo');
 

@@ -1,263 +1,379 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getulio About</title>
+    <title>GETULIO — about</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        body {
+
+        @font-face {
+            font-family: "Suisse International";
+            src: url("SuisseIntl-Regular.woff2") format("woff2"),
+                 url("SuisseIntl-Regular.woff") format("woff");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html, body {
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            font-family: "Times New Roman", serif;
-            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .header.adr {
             width: 100%;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            border-bottom: 1px solid #ddd;
-            box-sizing: border-box;
-            position: relative;
-            background-color: #ffffff;
-        }
-
-        .nav-area {
-            display: flex;
-            align-items: center;
-        }
-
-        .btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 0;
-        }
-
-        .btn .txt {
-            font-size: 14px;
+            height: 100%;
             font-family: "Times New Roman", serif;
-            margin-right: 5px;
-            text-transform: uppercase;
+
+            background-image: url("sitefundo.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            overflow: hidden;
         }
 
-        .btn .ico svg {
-            display: block;
-            font-size: 20px;
+        @media (max-width: 600px) {
+            html, body {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center;
+            }
         }
 
-        .logo-area {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .slide-menu-wrap {
+        /* ---- Botão de voltar ---- */
+        .back-btn {
             position: fixed;
-            top: 0;
-            left: -100%; 
-            width: 100%;
-            max-width: 575px;
-            font-family: "BigHitB", serif;
-            height: 100vh;
-            background-color: #ffffff;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            z-index: 9999;
-            transition: left 0.3s ease;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .slide-menu-wrap.active {
-            left: 0;
-        }
-
-        .slide-body {
-            padding: 80px 40px 20px 40px; 
-            position: relative;
-        }
-
-        .btn-slide-close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-        }
-
-        .slide-body ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .slide-body ul li {
-            margin-bottom: 24px; 
-            width: 100%;
-        }
-
-        .slide-body ul li a {
-            color: #000000;
+            top: 20px;
+            left: 20px;
+            font-family: "Times New Roman", serif;
+            font-size: 17px;
+            color: #000;
             text-decoration: none;
-            font-size: 24px;
-            text-transform: lowercase;
-            display: inline-block;
-            transition: opacity 0.2s ease;
+            z-index: 20;
+            transition: transform 0.2s ease;
         }
 
-        .slide-body ul li a:hover {
-            opacity: 0.6;
+        .back-btn:hover {
+            text-decoration: underline;
+            transform: translateX(-3px);
         }
 
-        .slide-body ul li strong {
-            font-size: 24px;
-            text-transform: lowercase;
-            font-weight: bold;
-            border-bottom: 2px solid #000000;
-            padding-bottom: 2px;
-        }
-
-        .slide-body ul li span {
-            margin-left: 2px;
-        }
-
-        .sns-wrap {
+        /* ---- Anéis de ripple ---- */
+        #ripples {
+            position: fixed;
+            inset: 0;
             display: flex;
-            gap: 15px;
-            padding: 40px;
-            margin-top: auto;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .sns-wrap img {
+        .ripple-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 24px;
             height: 24px;
-            object-fit: contain;
+            margin: -12px 0 0 -12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            opacity: 0;
+            animation: ripple-expand 1.6s ease-out forwards;
         }
 
-        .content-container {
-            max-width: 650px;
+        .ripple-ring--2 { animation-delay: 0.18s; }
+        .ripple-ring--3 { animation-delay: 0.36s; }
+
+        @keyframes ripple-expand {
+            0%   { transform: scale(0);  opacity: 0.9; }
+            65%  { opacity: 0.35; }
+            100% { transform: scale(48); opacity: 0; }
+        }
+
+        /* ---- Container principal (Layout Alinhado) ---- */
+        #page-reveal {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            clip-path: circle(0% at 50% 50%);
+            animation: reveal-circle 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        @keyframes reveal-circle {
+            to { clip-path: circle(150% at 50% 50%); }
+        }
+
+        #about-content {
+            max-width: 680px;
+            padding: 24px 32px;
+            box-sizing: border-box;
             text-align: center;
-            padding: 20px;
-            margin-top: 5vh; 
+            margin-top: -60px; /* Eleva levemente para centralizar em relação à tela */
         }
 
-        .responsive-art {
-            width: 85%;          
-            max-width: 480px;     
-            height: auto;         
-            margin-bottom: 20px;  
+        .about-text {
+            font-family: "Suisse International", "Helvetica Neue", Arial, sans-serif;
+            font-size: clamp(15px, 2.2vw, 19px);
+            line-height: 1.8;
+            color: #111;
+            margin: 0;
+            word-break: break-word;
         }
 
-        p {
-            line-height: 1.6;
-            font-size: 16px;
-            color: #000000;
-            margin-bottom: 24px;
+        /* ---- Ondas Psicodélicas Rebaixadas ---- */
+        #waves {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 160px; /* Reduzido de 240px para 160px */
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
-    </style>   
+
+        @media (max-width: 600px) {
+            #waves {
+                height: 100px; /* Ajuste responsivo em telas menores */
+            }
+        }
+
+        #waves svg {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 200%;
+            height: 100%;
+            display: block;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 100%);
+        }
+
+        .wave-1 {
+            opacity: 0.75;
+            animation: wave-scroll 12s linear infinite, hue-cycle 8s linear infinite;
+        }
+
+        .wave-2 {
+            opacity: 0.7;
+            animation: wave-scroll-rev 9s linear infinite, hue-cycle 6s linear infinite reverse;
+        }
+
+        .wave-3 {
+            opacity: 0.65;
+            animation: wave-scroll 15s linear infinite, hue-cycle 10s linear infinite;
+        }
+
+        .wave-4 {
+            opacity: 0.6;
+            animation: wave-scroll-rev 20s linear infinite, hue-cycle 12s linear infinite reverse;
+        }
+
+        @keyframes wave-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        @keyframes wave-scroll-rev {
+            from { transform: translateX(-50%); }
+            to   { transform: translateX(0); }
+        }
+
+        @keyframes hue-cycle {
+            0%   { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* ---- Bolinhas Flutuantes (Tela Inteira) ---- */
+        #bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+            mix-blend-mode: difference;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            top: var(--y, 50%);
+            left: -5vw;
+            width: var(--size, 14px);
+            height: var(--size, 14px);
+            background: var(--bubble-color, #FF3CAC);
+            box-shadow: 0 0 calc(var(--size, 14px) * 0.8) var(--bubble-color, #FF3CAC);
+            animation: bubble-float var(--dur, 12s) ease-in-out infinite,
+                       bubble-hue var(--hdur, 4s) linear infinite;
+            animation-delay: var(--delay, 0s), 0s;
+        }
+
+        @keyframes bubble-float {
+            0%   { transform: translate(0, 0) scale(0); opacity: 0; }
+            10%  { transform: translate(12vw, -10px) scale(1); opacity: var(--o, 0.85); }
+            90%  { transform: translate(108vw, 10px) scale(1); opacity: var(--o, 0.85); }
+            100% { transform: translate(120vw, 0) scale(0); opacity: 0; }
+        }
+
+        @keyframes bubble-hue {
+            0%   { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #page-reveal {
+                animation: none;
+                clip-path: none;
+            }
+            .ripple-ring {
+                display: none;
+            }
+            #waves, #bubbles {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
-    <!-- HEADER PRINCIPAL -->
-    <header class="header adr">
-        <div class="nav-area">
-            <button class="btn btn-nav ico-only" id="open-menu-btn">
-                <span class="txt">Menu</span>
-                <span class="ico">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6l16 0"></path>
-                        <path d="M4 12l16 0"></path>
-                        <path d="M4 18l16 0"></path>
-                    </svg>
-                </span>
-            </button>
-        </div>
+<a href="index.html" class="back-btn">&larr; back</a>
 
-        <div class="logo-area">
-            <a class="logo adr" href="index.html">
-                <div style="display: flex; align-items: center; justify-content: center;">
-                    <picture>
-                        <img src="logo.png" style="height: 60px; width: auto; object-fit: contain;" alt="Logo Principal">
-                    </picture>
-                </div>
-            </a>
-        </div>
-    </header>
+<div id="ripples">
+    <span class="ripple-ring ripple-ring--1"></span>
+    <span class="ripple-ring ripple-ring--2"></span>
+    <span class="ripple-ring ripple-ring--3"></span>
+</div>
 
-    <!-- MENU LATERAL (SLIDE MENU) -->
-    <div class="slide-menu-wrap" id="slide-menu">
-        <div class="slide-body">
-            <!-- Botão de Fechar (Apenas o X) -->
-            <button class="btn ico-only btn-slide-close" id="close-menu-btn">
-                <span class="ico">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.5em" width="1.5em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6l-12 12"></path>
-                        <path d="M6 6l12 12"></path>
-                    </svg>
-                </span>
-            </button>
-            
-            <!-- Links de Navegação em Texto -->
-            <ul>
-                <li><a href="index.html">home<span>.</span></a></li>
-                <li><a href="blog.html">blog<span>.</span></a></li>
-                <li><strong>about</strong></li>
-                <li><a href="https://summersoftget.github.io/poems.html">poems<span>.</span></a></li>
-                <li><a href="https://www.youtube.com/@getuliotecchio" target="_blank">youtube<span>.</span></a></li>
-                <li><a href="https://github.com/summersoftget" target="_blank">github<span>.</span></a></li>
-            </ul>
-        </div>
+<div id="waves">
+    <svg class="wave-1" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"    stop-color="#FF3CAC"/>
+                <stop offset="12.5%" stop-color="#FF9800"/>
+                <stop offset="25%"   stop-color="#00E5A0"/>
+                <stop offset="37.5%" stop-color="#2196F3"/>
+                <stop offset="50%"   stop-color="#FF3CAC"/>
+                <stop offset="62.5%" stop-color="#FF9800"/>
+                <stop offset="75%"   stop-color="#00E5A0"/>
+                <stop offset="87.5%" stop-color="#2196F3"/>
+                <stop offset="100%"  stop-color="#FF3CAC"/>
+            </linearGradient>
+        </defs>
+        <path d="M0,80 C180,20 360,140 720,80 C1080,20 1260,140 1440,80
+                 C1620,20 1800,140 2160,80 C2520,20 2700,140 2880,80
+                 L2880,240 L0,240 Z" fill="url(#grad1)"/>
+    </svg>
 
-        <!-- Redes Sociais do Menu Lateral -->
-        <div class="sns-wrap">
-            <span><a href="http://tiktok.com/@get___o" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_cce3c8ad-ad04-4493-9854-d5866d2cebbe.png" alt="TikTok"></a></span>
-            <span><a href="http://instagram.com/getuliotecchio" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f55e3a4-3d25-4d81-9ad4-d782b3d250a7.png" alt="Instagram"></a></span>
-            <span><a href="http://x.com/getuliao3" target="_blank"><img src="https://adoraudition.world/ADR/SNS/20250611_7f1672fd-e1f1-4952-805e-1ffcc4afae24.png" alt="X (Twitter)"></a></span>
-        </div>
+    <svg class="wave-2" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"    stop-color="#7B2FF7"/>
+                <stop offset="12.5%" stop-color="#F72585"/>
+                <stop offset="25%"   stop-color="#FFD60A"/>
+                <stop offset="37.5%" stop-color="#00F5D4"/>
+                <stop offset="50%"   stop-color="#7B2FF7"/>
+                <stop offset="62.5%" stop-color="#F72585"/>
+                <stop offset="75%"   stop-color="#FFD60A"/>
+                <stop offset="87.5%" stop-color="#00F5D4"/>
+                <stop offset="100%"  stop-color="#7B2FF7"/>
+            </linearGradient>   
+        </defs>
+        <path d="M0,110 C240,60 480,150 720,110 C960,60 1200,150 1440,110
+                 C1680,60 1920,150 2160,110 C2400,60 2640,150 2880,110
+                 L2880,240 L0,240 Z" fill="url(#grad2)"/>
+    </svg>
+
+    <svg class="wave-3" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"    stop-color="#00C2FF"/>
+                <stop offset="12.5%" stop-color="#39FF88"/>
+                <stop offset="25%"   stop-color="#FF1744"/>
+                <stop offset="37.5%" stop-color="#FFEA00"/>
+                <stop offset="50%"   stop-color="#00C2FF"/>
+                <stop offset="62.5%" stop-color="#39FF88"/>
+                <stop offset="75%"   stop-color="#FF1744"/>
+                <stop offset="87.5%" stop-color="#FFEA00"/>
+                <stop offset="100%"  stop-color="#00C2FF"/>
+            </linearGradient>
+        </defs>
+        <path d="M0,140 C160,90 500,180 720,140 C940,90 1280,180 1440,140
+                 C1600,90 1940,180 2160,140 C2380,90 2720,180 2880,140
+                 L2880,240 L0,240 Z" fill="url(#grad3)"/>
+    </svg>
+
+    <svg class="wave-4" viewBox="0 0 2880 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"    stop-color="#FF6EC7"/>
+                <stop offset="16.5%" stop-color="#845EC2"/>
+                <stop offset="33%"   stop-color="#00D2FC"/>
+                <stop offset="50%"   stop-color="#FF6EC7"/>
+                <stop offset="66.5%" stop-color="#845EC2"/>
+                <stop offset="83%"   stop-color="#00D2FC"/>
+                <stop offset="100%"  stop-color="#FF6EC7"/>
+            </linearGradient>
+        </defs>
+        <path d="M0,170 C220,130 460,205 720,170 C980,130 1220,205 1440,170
+                 C1660,130 1900,205 2160,170 C2420,130 2660,205 2880,170
+                 L2880,240 L0,240 Z" fill="url(#grad4)"/>
+    </svg>
+</div>
+
+<div id="bubbles"></div>
+
+<div id="page-reveal">
+    <div id="about-content">
+        <p class="about-text">
+            Oi! Eu sou o Getulio. Eu gosto de várias coisas:<br>
+            Música, Computação, Design, Matemática, Artes, Culinária e Fisiologia.<br>
+            Estou graduando em Ciências da Computação, moro em São Paulo<br>
+            e já assisti Como Se Fosse a Primeira Vez mais de 60 vezes.<br>
+            Nesse incrível (e majestoso) site você pode checar toda minha obra.<br>
+            Se você tiver interesse em me contatar para bate-papo ou<br>
+            trabalho, envie um e-mail em getuliotecchio1[at]gmail.com.
+        </p>
     </div>
+</div>
 
-    <!-- CONTEÚDO DA PÁGINA -->
-    <div class="content-container">
-        <img src="art2.png" class="responsive-art" alt="u2">
-        <p>
-            Getulio Tecchio is an undergraduate Computer Science student at the Federal University of ABC (UFABC). His interests span programming, mathematics, music, philosophy, literature, art, and physiology. Rather than seeing these as separate disciplines, he enjoys exploring the connections between them and understanding the principles that tie them together.
-        </p>
-        <p>
-            As a musician, he draws inspiration from artists such as John Mayer, Stevie Wonder, Prince, Chet Baker, Dijon, Paul Simon, Phil Collins, Miles Davis, Wes Montgomery and Sting. At first glance, this may seem like an eclectic mix of genres and styles, but what unites these artists is their devotion to music as a craft. They create with sincerity, curiosity, and an unwavering commitment to becoming better musicians.
-        </p>
-        <p>
-            More than anything, Getulio is drawn to things that make him feel alive. Whether it's a piece of music, a book, a mathematical proof, or a work of art, he admires creations that carry the unmistakable feeling that someone gave their whole self to them, the kind of work that quietly reminds you, <b><i>this is what being human feels like.</i></b>
-        </p>
-        <p>
-            He hopes to live a life filled with curiosity, meaningful work, and people he loves, while creating things that leave others with that same feeling.
-        </p>
-    </div>
+<script>
+    (function () {
+        var container = document.getElementById('bubbles');
+        var colors = ['#FF3CAC', '#00E5A0', '#FFD60A', '#7B2FF7', '#00C2FF', '#FF6EC7', '#39FF88', '#F72585'];
+        var total = window.innerWidth < 600 ? 18 : 35;
 
-    <!-- JAVASCRIPT -->
-    <script>
-        const openMenuBtn = document.getElementById('open-menu-btn');
-        const closeMenuBtn = document.getElementById('close-menu-btn');
-        const slideMenu = document.getElementById('slide-menu');
+        for (var i = 0; i < total; i++) {
+            var b = document.createElement('span');
+            b.className = 'bubble';
 
-        openMenuBtn.addEventListener('click', () => {
-            slideMenu.classList.add('active');
-        });
+            var size = 6 + Math.random() * 20;
+            var yPos = 5 + Math.random() * 85;
+            var dur = 8 + Math.random() * 14;
+            var delay = -Math.random() * dur;
+            var hdur = 3 + Math.random() * 5;
+            var opacity = 0.6 + Math.random() * 0.35;
+            var color = colors[Math.floor(Math.random() * colors.length)];
 
-        closeMenuBtn.addEventListener('click', () => {
-            slideMenu.classList.remove('active');
-        });
-    </script>
+            b.style.setProperty('--size', size.toFixed(1) + 'px');
+            b.style.setProperty('--y', yPos.toFixed(1) + '%');
+            b.style.setProperty('--dur', dur.toFixed(2) + 's');
+            b.style.setProperty('--delay', delay.toFixed(2) + 's');
+            b.style.setProperty('--hdur', hdur.toFixed(2) + 's');
+            b.style.setProperty('--o', opacity.toFixed(2));
+            b.style.setProperty('--bubble-color', color);
+
+            container.appendChild(b);
+        }
+    })();
+</script>
 
 </body>
 </html>
