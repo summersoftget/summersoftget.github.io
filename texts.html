@@ -153,12 +153,19 @@
     }
 
     @media (max-width:700px){
-        html, body{ overflow:auto; }
+        html, body{ overflow:hidden; } /* Prevents unwanted scrolling on mobile */
+        
         .split{
             flex-direction:column;
-            height:auto;
+            height: 100dvh; /* Uses dynamic viewport height for mobile browsers */
         }
-        .half{ height:50vh; }
+        
+        .half{ 
+            flex: none; /* Prevents the blocks from collapsing to 0 height */
+            height: 50%;
+            width: 100%;
+        }
+        
         .half.left{ border-right:none; border-bottom:1px solid var(--ink); }
 
         /* Smartphone: Força o texto da direita para a esquerda */
