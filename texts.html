@@ -68,25 +68,22 @@
         height:108%;
         background-size:cover;
         background-position:center;
-        transition:transform 0.45s ease;
         transform:scale(1);
         filter:grayscale(15%);
-        /* Adicionando transição para a opacidade */
-        transition: opacity 0.45s ease; 
+        /* Adicionando transição combinada */
+        transition: transform 0.45s ease, opacity 0.45s ease; 
+        
+        /* NOVA MUDANÇA: Estado inicial visível */
+        opacity: 1; 
     }
 
-    /* No hover: a imagem aparece */
+    /* NOVA MUDANÇA: No hover a imagem desaparece (fica transparente) */
     .half:hover .photo, .half.active .photo{
-        opacity: 1;
-        transform:scale(1.06); /* Mantendo a animação de zoom */
-    }
-
-    /* Estado inicial: a imagem está oculta (transparente) */
-    .half .photo{
         opacity: 0;
+        transform:scale(1.06); /* Mantém o efeitinho de zoom enquanto some */
     }
 
-    /* No hover: o fundo fica preto (apenas para garantir, já que o corpo já é preto) */
+    /* No hover: o fundo fica preto */
     .half:hover, .half.active{
         background-color: var(--ink); 
     }
@@ -96,42 +93,56 @@
         inset:0;
         background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 42%);
         pointer-events:none;
-        /* Adicionando transição para a opacidade */
         transition: opacity 0.45s ease; 
-    }
-    
-    /* O véu também aparece no hover */
-    .half:hover .veil, .half.active .veil{
+        
+        /* NOVA MUDANÇA: Estado inicial do véu visível para ler o texto em cima da foto */
         opacity: 1;
     }
     
-    /* Estado inicial do véu: oculto */
-    .half .veil{
+    /* NOVA MUDANÇA: O véu também desaparece no hover junto com a foto */
+    .half:hover .veil, .half.active .veil{
         opacity: 0;
     }
 
-    .half .label{
+    /* Novo container para manter título e subtítulo alinhados */
+    .half .content {
         position:absolute;
-        left:32px;
         bottom:32px;
         z-index:2;
-        font-family:var(--sans);
-        font-weight:600;
-        font-size:clamp(28px, 5vw, 48px);
+        display:flex;
+        flex-direction:column;
+    }
+
+    /* PC: Blog no canto esquerdo */
+    .half.left .content {
+        left:32px;
+        align-items:flex-start;
+        text-align:left;
+    }
+
+    /* PC: Essays no canto direito */
+    .half.right .content {
+        right:32px;
+        align-items:flex-end;
+        text-align:right;
+    }
+
+    .half .label{
+        font-family: "Futura PT Medium", "Futura PT", Futura, sans-serif;
+        font-weight:500;
+        font-size:75pt; /* Tamanho para PC */
         color:var(--paper);
         letter-spacing:0.2px;
+        line-height:1;
+        margin:0;
     }
 
     .half .sub{
-        position:absolute;
-        left:32px;
-        bottom:32px;
-        transform:translateY(28px);
-        z-index:2;
         font-family:var(--sans);
         font-weight:500;
         font-size:13px;
         color:rgba(255,255,255,0.75);
+        margin-top:8px;
     }
 
     @media (max-width:700px){
@@ -142,6 +153,19 @@
         }
         .half{ height:50vh; }
         .half.left{ border-right:none; border-bottom:1px solid var(--ink); }
+
+        /* Smartphone: Força o texto da direita para a esquerda */
+        .half.right .content {
+            left:32px;
+            right:auto;
+            align-items:flex-start;
+            text-align:left;
+        }
+
+        /* Smartphone: Diminui a fonte para caber melhor na tela menor */
+        .half .label{
+            font-size:40pt;
+        }
     }
 
 </style>
@@ -152,20 +176,22 @@
 
     <div class="split">
 
-        <!-- Troque a imagem de fundo em lebowski.png pela foto que representa o blog -->
-        <a class="half left" href="https://summersoftget.github.io/texts.html">
-            <div class="photo" style="background-image:url('lebowski.png');"></div>
+        <a class="half left" href="https://summersoftget.github.io/blog.html">
+            <div class="photo" style="background-image:url('backgroundblog.png');"></div>
             <div class="veil"></div>
-            <span class="label">texts</span>
-            <span class="sub">pensamentos, mais soltos</span>
+            <div class="content">
+                <span class="label">blog</span>
+                <span class="sub">pensamentos, mais soltos</span>
+            </div>
         </a>
 
-        <!-- Troque a imagem de fundo em essaysphoto.jpg pela foto que representa os ensaios -->
         <a class="half right" href="https://summersoftget.github.io/essays.html">
-            <div class="photo" style="background-image:url('essaysphoto.jpg');"></div>
+            <div class="photo" style="background-image:url('backgroundessays.png');"></div>
             <div class="veil"></div>
-            <span class="label">essays</span>
-            <span class="sub">textos mais longos</span>
+            <div class="content">
+                <span class="label">essays</span>
+                <span class="sub">textos mais longos</span>
+            </div>
         </a>
 
     </div>
