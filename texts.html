@@ -53,13 +53,13 @@
         display:block;
         text-decoration:none;
         border:none;
-        /* Adicionando transição para a cor de fundo */
-        transition: background-color 0.45s ease; 
+        background-color: var(--ink);
     }
 
     /* thin divider between the two halves */
     .half.left{ border-right:1px solid var(--ink); }
 
+    /* Base styles for both photo layers */
     .half .photo{
         position:absolute;
         top:-4%;
@@ -70,22 +70,31 @@
         background-position:center;
         transform:scale(1);
         filter:grayscale(15%);
-        /* Adicionando transição combinada */
         transition: transform 0.45s ease, opacity 0.45s ease; 
-        
-        /* NOVA MUDANÇA: Estado inicial visível */
-        opacity: 1; 
     }
 
-    /* NOVA MUDANÇA: No hover a imagem desaparece (fica transparente) */
-    .half:hover .photo, .half.active .photo{
+    /* Imagem principal visível por padrão */
+    .half .photo.main {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    /* Imagem secundária (hover) invisível por padrão */
+    .half .photo.alt {
         opacity: 0;
-        transform:scale(1.06); /* Mantém o efeitinho de zoom enquanto some */
+        z-index: 0;
     }
 
-    /* No hover: o fundo fica preto */
-    .half:hover, .half.active{
-        background-color: var(--ink); 
+    /* No hover: a imagem principal desaparece */
+    .half:hover .photo.main, .half.active .photo.main {
+        opacity: 0;
+        transform:scale(1.06); 
+    }
+
+    /* No hover: a imagem secundária aparece */
+    .half:hover .photo.alt, .half.active .photo.alt {
+        opacity: 1;
+        transform:scale(1.06); 
     }
 
     .half .veil{
@@ -94,21 +103,19 @@
         background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 42%);
         pointer-events:none;
         transition: opacity 0.45s ease; 
-        
-        /* NOVA MUDANÇA: Estado inicial do véu visível para ler o texto em cima da foto */
         opacity: 1;
+        z-index: 2;
     }
     
-    /* NOVA MUDANÇA: O véu também desaparece no hover junto com a foto */
+    /* O véu desaparece no hover para revelar a segunda imagem limpa */
     .half:hover .veil, .half.active .veil{
         opacity: 0;
     }
 
-    /* Novo container para manter título e subtítulo alinhados */
     .half .content {
         position:absolute;
         bottom:32px;
-        z-index:2;
+        z-index:3;
         display:flex;
         flex-direction:column;
     }
@@ -130,7 +137,7 @@
     .half .label{
         font-family: "Futura PT Medium", "Futura PT", Futura, sans-serif;
         font-weight:500;
-        font-size:75pt; /* Tamanho para PC */
+        font-size:75pt;
         color:var(--paper);
         letter-spacing:0.2px;
         line-height:1;
@@ -177,7 +184,10 @@
     <div class="split">
 
         <a class="half left" href="https://summersoftget.github.io/blog.html">
-            <div class="photo" style="background-image:url('backgroundblog.png');"></div>
+            <!-- Imagem secundária (hover) -->
+            <div class="photo alt" style="background-image:url('backgroundblog2.png');"></div>
+            <!-- Imagem principal -->
+            <div class="photo main" style="background-image:url('backgroundblog.png');"></div>
             <div class="veil"></div>
             <div class="content">
                 <span class="label">blog</span>
@@ -186,7 +196,10 @@
         </a>
 
         <a class="half right" href="https://summersoftget.github.io/essays.html">
-            <div class="photo" style="background-image:url('backgroundessays.png');"></div>
+            <!-- Imagem secundária (hover) -->
+            <div class="photo alt" style="background-image:url('backgroundessays2.png');"></div>
+            <!-- Imagem principal -->
+            <div class="photo main" style="background-image:url('backgroundessays.png');"></div>
             <div class="veil"></div>
             <div class="content">
                 <span class="label">essays</span>
